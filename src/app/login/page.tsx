@@ -1,6 +1,5 @@
 'use client'
 import { useState } from "react";
-import styles from "../Home.module.css"
 
 export default function Login() {
     function activeOrDesactive(value: number) {
@@ -10,14 +9,10 @@ export default function Login() {
             setToggleActiveInfo(value);
         }
     }
-    function portChange() {
-        return ("/pedroflix/")
-    }
-    function englishChange() {
-        return ("/pedroflix/en")
-    }
     const [toggleActiveInfo, setToggleActiveInfo] = useState<number>(0)
     return (
-       <div></div> 
+       <div>
+        <button onClick={() => activeOrDesactive}></button>
+       </div> 
     )
 }
