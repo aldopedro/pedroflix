@@ -1,0 +1,407 @@
+
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+.master {
+    transition-duration: 250ms;
+    transform: none;
+    color: #333;
+    background-color: #FFF;
+    font-family: Netflix Sans;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    max-width: 440px;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+    align-items: center;
+}
+
+.headerTitle {
+    font-family: Bebas Neue;
+    font-size: 60px;
+    color: #E50914;
+    margin-left: 3%;
+    cursor: pointer;
+}
+
+.headerButton {
+    appearance: none;
+    background-color: transparent;
+    font-family: Netflix Sans;
+    float: right;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 90px;
+    margin: 0 3%;
+    cursor: pointer;
+}
+
+.headerButton:hover {
+    text-decoration: underline;
+}
+
+.registerAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 170px;
+}
+
+.devices {
+    background: url("../../assets/Devices.png") no-repeat 50% 50%;
+    margin: 100px 0 20px;
+    width: 260px;
+    background-size: 260px;
+    height: 90px;
+}
+
+.step,
+.step>strong {
+    font-size: 13px;
+    text-align: center;
+}
+
+.stepTitle {
+    font-size: 32px;
+    max-width: 340px;
+    text-align: center;
+    font-weight: 500;
+    margin: 0 0 .4em;
+}
+
+.stepDescription {
+    font-size: 18px;
+    max-width: 340px;
+    text-align: center;
+    font-weight: 400;
+
+}
+
+.stepButton {
+    padding: 18px 124px;
+    background-color: #e50914;
+    border-radius: 4px;
+    font-size: 24px;
+    font-weight: 400;
+    font-family: Netflix Sans;
+    color: #FFF;
+    margin-top: 24px;
+}
+
+.stepButton:hover {
+    background-color: #f6121d;
+    cursor: pointer;
+}
+
+.footer {
+    border-top: 1px solid #e6e6e6;
+    background-color: #f3f3f3;
+    padding: 20px 0 30px;
+
+}
+
+.footerContent {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.footerTitle {
+    font-size: 1em;
+    color: #737373;
+    margin: 0 0 30px;
+    font-family: Netflix Sans;
+}
+
+.footerLink {
+    font-size: 13px;
+    max-width: 1000px;
+    color: #737373;
+}
+
+.footerLinkItem {
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 0 22px 0 0;
+    width: 22%;
+}
+
+.footerLinkItem:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.footerSelect {
+    color: #737373;
+    background-color: #FFF;
+    appearance: none;
+    border: 1px solid #a6a6a6;
+    border-radius: 2px;
+    font-size: 16px;
+    font-family: Netflix Sans;
+    height: 46px;
+    padding: 10px 32px 12px 40px;
+}
+
+.footerMainSelect {
+    position: relative;
+}
+
+.footerMainSelect::before {
+    color: #444;
+    font-size: 16px;
+    top: 14px;
+    left: 14px;
+    pointer-events: none;
+    position: absolute;
+}
+
+.footerMainSelect::after {
+    background-color: #fff;
+    border: 6px solid #fff;
+    border-top-color: rgb(255, 255, 255);
+    border-top-color: #333;
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 128px;
+    pointer-events: none;
+}
+
+/* registerFormBR -> */
+.formStep {
+    margin-top: 54px;
+    text-align: justify;
+    font-size: 13px;
+}
+
+.titleStep {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.descriptionStep {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.form_input:focus,
+.form_email_false:focus,
+.form_email_true:focus {
+    outline: 2px solid #333;
+    border-radius: 4px;
+    outline-offset: 2px;
+}
+
+.form_email_true_text {
+    display: none;
+}
+
+.form_email_true,
+.borderPasswordTrue {
+    border: 1px solid rgb(43, 184, 113);
+}
+
+.form_email_false,
+.borderPasswordFalse {
+    border: 1px solid rgb(235, 57, 66);
+}
+
+.form_input {
+    border: 1px solid rgba(128, 128, 128, 0.7);
+}
+
+.borderPasswordTrue:focus,
+.borderPasswordFalse:focus {
+    outline: none;
+}
+
+.form_email_false_text {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    color: rgb(235, 57, 66);
+    gap: 4px;
+    align-items: center;
+    color: rgb(235, 57, 66);
+    font-size: 0.8125rem;
+}
+
+.form_input::placeholder {
+    color: #adadad;
+}
+
+.form_email_false,
+.form_email_true,
+.borderPasswordTrue,
+.borderPasswordFalse,
+.form_input {
+    width: 91%;
+    display: flex;
+    border-radius: 4px;
+    padding: 26px 16px 8px;
+    outline-offset: 2px;
+    line-height: 1.8;
+    font: inherit;
+    margin-top: 16px;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.form_label {
+    position: absolute;
+    z-index: 1;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    transition-timing-function: cubic-bezier(0.9, 0, 0.51, 1);
+    transition-duration: 250ms;
+    top: 32px;
+    left: 16px;
+    pointer-events: none;
+    color: #333;
+}
+
+.form_label_active {
+    position: absolute;
+    z-index: 1;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+    transition-duration: 250ms;
+    top: 24px;
+    left: 16px;
+    font-family: inherit;
+    pointer-events: none;
+    color: #333;
+}
+
+.mainInput {
+    position: relative
+}
+
+.passwordLabelTrue {
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    font-size: 12px;
+    transition-duration: 250ms;
+}
+
+.passwordLabelFalse {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    pointer-events: none;
+    transition-duration: 250ms;
+}
+
+.passwordIncorrect {
+    font-size: 13px;
+    font-weight: 300;
+    color: #e50914;
+    margin-top: 6px;
+    margin-left: 6px;
+}
+
+.passwordCorrect {
+    display: none;
+}
+
+.form_button {
+    border-radius: 4px;
+    background-color: rgb(229, 9, 20);
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 500;
+    min-height: 56px;
+    padding: 12px 24px;
+    font-family: inherit;
+    cursor: pointer;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.9, 0, 0.51, 1);
+    width: 99%;
+    margin-top: 16px;
+    margin-bottom: 70px;
+}
+
+.form_button:hover {
+    transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+    background: rgb(193, 17, 25);
+}
+
+.mainForm {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+}
+
+.displayAuto {
+    display: none;
+}
+
+.displayNone {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.mainAlert {
+    padding: 16px;
+    background-color: rgb(216, 157, 49);
+    border-radius: 4px;
+}
+
+.loginAlert {
+    color: black;
+}
+
+.emailExist {
+    max-width: 406px;
+    display: flex;
+    align-items: center;
+}
+
+.alertIcon {
+    margin-right: 18px;
+}
+
+@media (max-width:480px) {
+    .headerTitle{
+        font-size: 52px;
+    }
+    .stepTitle {
+        font-size: 24px;
+    }
+    .stepDescription {
+        font-size: 14px;
+        margin: 0 20px;
+    }
+    .stepButton {
+        padding: 18px 30%;
+    }
+    .register {
+        max-width: 90%;
+    }
+    .form_input,
+    .borderPasswordTrue,
+    .form_email_true,
+    .form_email_false,
+    .borderPasswordFalse {
+        padding: 26px 4% 8px;
+        background-color: transparent;
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+    }
+    .registerAccount{
+        padding-bottom: 60px;
+    }
+}

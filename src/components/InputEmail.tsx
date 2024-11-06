@@ -1,5 +1,6 @@
 import style from "../app/Home.module.css"
 import { useCallback, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   buttonText: string,
@@ -19,8 +20,12 @@ function InputEmail(props: Props) {
     }
   }
   function registerBr() {
+    event?.preventDefault()
     if (emailCorrect === 2 && emailValue != "") {
-      
+      if (props.buttonText === "Get Started") {
+        router.push('/register/en')
+      } else router.push('/register/br')
+      console.log(props.buttonText)
     }
     else if (emailValue === "") {
       event?.preventDefault()
@@ -29,7 +34,7 @@ function InputEmail(props: Props) {
     } else
       event?.preventDefault()
   }
-
+  const router = useRouter()
   const [emailCorrect, setEmailCorrect] = useState(Number)
   const [emailValue, setEmailValue] = useState(String)
   const [activeLabel, setActiveLabel] = useState(Boolean)

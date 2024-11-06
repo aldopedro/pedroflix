@@ -1,4 +1,4 @@
-import style from "../pages/Registration/register.module.css"
+import styles from "../app/register/register.module.css"
 interface Prop {
     language: string;
     languageStep: string;
@@ -24,22 +24,22 @@ function RegistrationFooter(language: Prop) {
 
     if (language.language === "pt") {
         return (
-            <footer className={style.footer}>
-                <div className={style.footerContent}>
-                    <p className={style.footerTitle}>Dúvidas? Ligue 0800 591 2876</p>
-                    <ul className={style.footerLink}>
-                        <li className={style.footerLinkItem}>Perguntas frequentes</li>
-                        <li className={style.footerLinkItem}>Central de Ajuda</li>
-                        <li className={style.footerLinkItem}>Pedroflix Shop</li>
-                        <li className={style.footerLinkItem}>Termos de Uso</li>
-                        <li className={style.footerLinkItem}>Privacidade</li>
-                        <li className={style.footerLinkItem}>Preferências de cookies</li>
-                        <li className={style.footerLinkItem}>Informações corporativas</li>
+            <footer className={styles.footer}>
+                <div className={styles.footerContent}>
+                    <p className={styles.footerTitle}>Dúvidas? Ligue 0800 591 2876</p>
+                    <ul className={styles.footerLink}>
+                        <li className={styles.footerLinkItem}>Perguntas frequentes</li>
+                        <li className={styles.footerLinkItem}>Central de Ajuda</li>
+                        <li className={styles.footerLinkItem}>Pedroflix Shop</li>
+                        <li className={styles.footerLinkItem}>Termos de Uso</li>
+                        <li className={styles.footerLinkItem}>Privacidade</li>
+                        <li className={styles.footerLinkItem}>Preferências de cookies</li>
+                        <li className={styles.footerLinkItem}>Informações corporativas</li>
                     </ul>
-                    <div className={`nf nf-fa-globe ${style.footerMainSelect}`}>
-                        <select onChange={(e) => e.target.value === "pt-BR" ? portChange(language) : englishChange(language)} name="LanguageSelect" className={style.footerSelect}>
-                            <option lang="pt" label='Português' value="pt-BR" className={style.footerOption}>Português</option>
-                            <option lang="en" label='English' value="en-BR" className={style.footerOption}>English</option>
+                    <div className={`nf nf-fa-globe ${styles.footerMainSelect}`}>
+                        <select onChange={(e) => e.target.value === "pt-BR" ? portChange(language) : englishChange(language)} name="LanguageSelect" className={styles.footerSelect}>
+                            <option lang="pt" label='Português' value="pt-BR" className={styles.footerOption}>Português</option>
+                            <option lang="en" label='English' value="en-BR" className={styles.footerOption}>English</option>
                         </select>
                     </div>
                 </div>
@@ -47,22 +47,22 @@ function RegistrationFooter(language: Prop) {
         )
     } else if(language.language === "en")
         return (
-            <footer className={style.footer}>
-                <div className={style.footerContent}>
-                    <p className={style.footerTitle}>Questions? Call 0800 591 2876</p>
-                    <ul className={style.footerLink}>
-                        <li className={style.footerLinkItem}>FAQ</li>
-                        <li className={style.footerLinkItem}>Help Center</li>
-                        <li className={style.footerLinkItem}>Pedroflix Shop</li>
-                        <li className={style.footerLinkItem}>Terms of Use</li>
-                        <li className={style.footerLinkItem}>Privacy</li>
-                        <li className={style.footerLinkItem}>Cookie Preferences</li>
-                        <li className={style.footerLinkItem}>Corporate Information</li>
+            <footer className={styles.footer}>
+                <div className={styles.footerContent}>
+                    <p className={styles.footerTitle}>Questions? Call 0800 591 2876</p>
+                    <ul className={styles.footerLink}>
+                        <li className={styles.footerLinkItem}>FAQ</li>
+                        <li className={styles.footerLinkItem}>Help Center</li>
+                        <li className={styles.footerLinkItem}>Pedroflix Shop</li>
+                        <li className={styles.footerLinkItem}>Terms of Use</li>
+                        <li className={styles.footerLinkItem}>Privacy</li>
+                        <li className={styles.footerLinkItem}>Cookie Preferences</li>
+                        <li className={styles.footerLinkItem}>Corporate Information</li>
                     </ul>
-                    <div className={`nf nf-fa-globe ${style.footerMainSelect}`}>
-                        <select onChange={(e) => e.target.value === "pt-BR" ? portChange(language) : englishChange(language)} name="LanguageSelect" className={style.footerSelect}>
-                            <option lang="en" label='English' value="en-BR" className={style.footerOption}>English</option>
-                            <option lang="pt" label='Português' value="pt-BR" className={style.footerOption}>Português</option>
+                    <div className={`nf nf-fa-globe ${styles.footerMainSelect}`}>
+                        <select onChange={(e) => e.target.value === "pt-BR" ? portChange(language) : englishChange(language)} name="LanguageSelect" className={styles.footerSelect}>
+                            <option lang="en" label='English' value="en-BR" className={styles.footerOption}>English</option>
+                            <option lang="pt" label='Português' value="pt-BR" className={styles.footerOption}>Português</option>
                         </select>
                     </div>
                 </div>

@@ -160,7 +160,13 @@
   }
 
   .background_shadow {
-    background-image: linear-gradient(360deg, rgba(0, 0, 0, 0.8500) 8.000%, rgba(0, 0, 0, 0.8465) 15.67%, rgba(0, 0, 0, 0.8361) 23.33%, rgba(0, 0, 0, 0.8187) 31.00%, rgba(0, 0, 0, 0.7944) 38.67%, rgba(0, 0, 0, 0.7632) 46.33%, rgba(0, 0, 0, 0.7250) 54.00%, rgba(0, 0, 0, 0.6868) 61.67%, rgba(0, 0, 0, 0.6556) 69.33%, rgba(0, 0, 0, 0.6312) 77.00%, rgba(0, 0, 0, 0.6139) 84.67%, rgba(0, 0, 0, 0.6035) 92.33%, rgba(0, 0, 0, 0.6000) 100.0%);
+    background-image: linear-gradient(360deg, rgba(0, 0, 0, 0.8500) 8.000%, 
+    rgba(0, 0, 0, 0.8465) 15.67%, rgba(0, 0, 0, 0.8361) 23.33%, 
+    rgba(0, 0, 0, 0.8187) 31.00%, rgba(0, 0, 0, 0.7944) 38.67%, 
+    rgba(0, 0, 0, 0.7632) 46.33%, rgba(0, 0, 0, 0.7250) 54.00%,
+     rgba(0, 0, 0, 0.6868) 61.67%, rgba(0, 0, 0, 0.6556) 69.33%, 
+     rgba(0, 0, 0, 0.6312) 77.00%, rgba(0, 0, 0, 0.6139) 84.67%,
+      rgba(0, 0, 0, 0.6035) 92.33%, rgba(0, 0, 0, 0.6000) 100.0%);
     position: absolute;
     top: 0;
     right: 0;
@@ -204,7 +210,6 @@
     transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
     background-color: rgb(193, 17, 25);
     border-radius: 4px;
-    max-height: 22px;
   }
 
   .master_register {
@@ -474,6 +479,7 @@
 
   .card_one_moldure {
     position: relative;
+    
   }
 
   .card_one_image,
@@ -481,6 +487,7 @@
     position: relative;
     z-index: 1;
     max-width: 100%;
+    height: 100%;
   }
 
   .card_one_video {
@@ -706,6 +713,7 @@
   }
   .card_three_image {
     max-width: 100%;
+    height: 100%;
   }
   .master_register {
     top: 22%;
@@ -885,7 +893,10 @@
   .card_two_image,
   .card_three_image,
   .card_four_image {
-    width: 300px;
+    width: 100%;
+  }
+  .card_four_medium_image {
+    height: 100%;
   }
   .card_one,
   .card_two,
@@ -895,7 +906,7 @@
     overflow-x: hidden;
   }
   .card_one_video > video{
-    width: 220px;
+    width: 100%;
   }
   .card_two_video {
     top: 24px;
