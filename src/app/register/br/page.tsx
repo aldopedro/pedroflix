@@ -4,7 +4,7 @@ import RegistrationFooter from "../../../components/RegistrationFooter"
 import RegistrationHeader from "../../../components/RegistrationHeader"
 import { useRouter } from "next/navigation"
 
-function registerBr() {
+function RegisterBr() {
     function nextStep () {
         router.push("/register/form")
     }
@@ -23,4 +23,4 @@ function registerBr() {
         </div>
     )
 } 
-export default registerBr
+export default RegisterBr
