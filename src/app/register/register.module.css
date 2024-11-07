@@ -245,7 +245,7 @@
 .borderPasswordTrue,
 .borderPasswordFalse,
 .form_input {
-    width: 91%;
+    width: 100%;
     display: flex;
     border-radius: 4px;
     padding: 26px 16px 8px;
@@ -329,7 +329,7 @@
     cursor: pointer;
     transition-duration: 250ms;
     transition-timing-function: cubic-bezier(0.9, 0, 0.51, 1);
-    width: 99%;
+    width: 100%;
     margin-top: 16px;
     margin-bottom: 70px;
 }
@@ -363,6 +363,11 @@
 
 .loginAlert {
     color: black;
+    text-decoration: underline;
+}
+
+.loginAlert:hover {
+    opacity: 50%;
 }
 
 .emailExist {
@@ -403,5 +408,8 @@
     }
     .registerAccount{
         padding-bottom: 60px;
+    }
+    .mainForm {
+        width: 92%;
     }
 }

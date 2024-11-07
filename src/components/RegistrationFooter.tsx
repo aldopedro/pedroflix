@@ -1,4 +1,6 @@
 import styles from "../app/register/register.module.css"
+import { useRouter } from "next/navigation"
+
 interface Prop {
     language: string;
     languageStep: string;
@@ -7,21 +9,19 @@ interface Prop {
 function RegistrationFooter(language: Prop) {
     function portChange(languageStep: Prop) {
         if (languageStep.languageStep === "pt2") {
-            return ("/Pedroflix-project/register-br/regform")
+            router.push("/register/form")
         } else if (languageStep.languageStep === "pt1") {
-            return ("/Pedroflix-project/register-br")
-        } else
-            console.log()
+            router.push('/register/br')
+        }
     }
     function englishChange(language: Prop) {
         if (language.languageStep === "en2") {
-            return ("/Pedroflix-project/register-en/regform")
+            router.push('/register/formEN')
         } else if (language.languageStep === "en1") {
-            return ("/Pedroflix-project/register-en")
-        } else
-        console.log()
+            router.push('/register/en')
+        }
     }
-
+    const router = useRouter()
     if (language.language === "pt") {
         return (
             <footer className={styles.footer}>
