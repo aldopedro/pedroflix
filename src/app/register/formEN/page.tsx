@@ -6,7 +6,7 @@ import RegistrationHeader from "../../../components/RegistrationHeader";
 
 
 function FormEN () {
-    async function validateAll(e: any) {
+    async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if (emailCorrect === 2 && correctBorder === true) {
           const result = await fetch('http://localhost:8081/add_user', {
@@ -89,8 +89,7 @@ return (
         <div className={style.register}>
           <p className={style.formStep}>PASSO <strong>2</strong> DE <strong>3</strong></p>
           <h4 className={style.titleStep}>Create a password to start your membership</h4>
-          <h6 className={style.descriptionStep}>Just a few more steps and you're done!<br />
-            We hate paperwork, too.</h6>
+          <h6 className={style.descriptionStep}>Just a few more steps and you&apos;re free done!<br />We hate paperwork, too.</h6>
         </div>
         <form className={style.mainForm} action="" onSubmit={async (e) => await validateAll(e)} method="post">
           <label className={activeLabel === false ? style.form_label : style.form_label_active} htmlFor="">Email</label>

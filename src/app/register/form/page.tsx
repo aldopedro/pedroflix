@@ -8,7 +8,7 @@ import RegistrationHeader from "../../../components/RegistrationHeader";
 function RegisterForm() {
 
 
-  async function validateAll(e: any) {
+  async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
     if (emailCorrect === 2 && correctBorder === true) {
       const result = await fetch('http://localhost:8081/add_user', {
