@@ -1,5 +1,5 @@
 import style from "../app/Home.module.css"
-import { useCallback, useRef, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 interface Props {

@@ -11,7 +11,7 @@ import { useState } from "react"
 
 export default function Login() {
     const [emailBorderToggle, setEmailBorderToggle] = useState<boolean>()
-    const [emailTextToggle, setEmailTextToggle] = useState<boolean>()
+    //const [emailTextToggle, setEmailTextToggle] = useState<boolean>()
     const [emailValue, setEmailValue] = useState<string>()
     const [activeValidationRed, setActiveValidationRed] = useState<boolean>()
 
@@ -48,15 +48,19 @@ export default function Login() {
                         <input
                             className={`${emailBorderToggle === true ? styles.formInputGreen : emailBorderToggle === false && emailValue != "" && activeValidationRed === true ? styles.formInputRed : styles.formInput}`}
                             onChange={e => validateEmail(e.target.value)}
-                            onBlur={(e) => validateEmail(e.target.value) === true && e.target.value != "" ? setEmailBorderToggle(true) : validateEmail(e.target.value) === false ?  setActiveValidationRed(true) : setEmailBorderToggle(false)}
-                            onClick={() => setEmailTextToggle(true)}
+                            onBlur={(e) => validateEmail(e.target.value) === true && e.target.value != "" ? setEmailBorderToggle(true) : validateEmail(e.target.value) === false ? setActiveValidationRed(true) : setEmailBorderToggle(false)}
+                            
                             type="email"
                             name="email"
                             id="email" />
                     </div>
                     <div className={styles.mainFormInput}>
                         <p className={styles.formPassword}>Senha</p>
-                        <input className={styles.formInput} type="password" name="password" id="password" />
+                        <input 
+                        className={styles.formInput}
+                            type="password"
+                            name="password"
+                            id="password" />
                     </div>
                     <button className={styles.formButton}>Entrar</button>
                     <Link className={styles.rememberPassword} href="/loginHelp">Esqueceu a senha?</Link>
