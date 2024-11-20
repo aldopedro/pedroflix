@@ -29,7 +29,6 @@ function InputEmail(props: Props) {
     }
     else if (emailValue === "") {
       event?.preventDefault()
-      handleFocusInput()
       setActiveLabel(true)
     } else
       event?.preventDefault()
@@ -38,19 +37,13 @@ function InputEmail(props: Props) {
   const [emailCorrect, setEmailCorrect] = useState(Number)
   const [emailValue, setEmailValue] = useState(String)
   const [activeLabel, setActiveLabel] = useState(Boolean)
-
-  const handleFocusInput = useCallback(() => {
-    event?.preventDefault()
-    emailInputRef.current?.focus();
-  }, [])
-  const emailInputRef = useRef<HTMLInputElement>(null);
   const [activeContent, setActiveContent] = useState(Number)
 
   return (
     <div className={style.main_form}>
       <div className={style.main_form_input}>
         <label className={activeLabel === false ? style.form_label : style.form_label_active} htmlFor="">Email</label>
-        <input ref={emailInputRef}
+        <input
           onChange={e => validateEmail(e.target.value)}
           onClick={() => setActiveLabel(true)}
           onBlur={(e) => validateEmail(e.target.value) === 1 && e.target.value != "" ? setActiveContent(2) : emailCorrect === 2 ? setActiveContent(1) : setActiveLabel(false)}

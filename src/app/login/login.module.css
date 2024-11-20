@@ -4,8 +4,7 @@
   width: 100%;
   position: absolute;
   z-index: -1;
-  max-height: 986px;
-  min-height: 900px;
+  height: 100%;
 }
 
 .overlayShadow {
@@ -30,8 +29,6 @@
   right: 0;
   bottom: 0;
   left: 0;
-  max-height: 988px;
-  min-height: 900px;
 }
 
 .overlayImage {
@@ -39,8 +36,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  max-height: 986px;
-  min-height: 900px;
 }
 
 .header {
@@ -60,7 +55,7 @@
     background-color: rgba(0,0,0,0.7);
     display: flex;
     flex-direction: column;
-    padding: 48px 68px 100px;
+    padding: 48px 68px 280px;
     max-width: 450px;
     margin: auto;
     border-radius: 4px;
@@ -100,7 +95,9 @@
   font-size: 16px;
 }
 
-.formInput {
+.formInput,
+.formInputGreen,
+.formInputRed {
   border: 1px solid #737373;
   background: rgba(22, 22, 22, 0.7);
   border-radius: 0.25rem;
@@ -110,6 +107,12 @@
   width: 100%;
 }
 
+.formInputGreen {
+  border: 1px solid #1eff00 !important;
+}
+.formInputRed {
+  border: 1px solid rgb(229, 9, 20) !important;
+}
 
 .formButton {
   border-radius: 4px;
@@ -142,6 +145,7 @@
 
 .mainRemember {
   display: flex;
+  margin-top: 24px;
 }
 
 .rememberText {
@@ -149,12 +153,38 @@
   padding-left: 12px;
 }
 
+.backToHome {
+  display: flex;
+  color: #737373;
+}
+
+.backToHomeLink {
+  color: white;
+  margin-left: 4px;
+}
+
+.backToHomeLink:hover {
+  text-decoration: underline;
+}
+
 .preFooter {
+  margin-top: 102px;
   height: 100px;
+  width: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.7) 0%, rgb(0,0,0) 20%);
+}
+
+.footer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  
 }
 
 .footer :first-child {
     background-color: black;
+    border:none;
 }
 
 .footer :first-child > div::after {
@@ -166,6 +196,9 @@
     color: white;
 }
 
+.footer :first-child > div > select {
+  border: 1px solid #737373;
+}
 
 .footer :first-child > ul > li{
     text-decoration: underline #737373;
