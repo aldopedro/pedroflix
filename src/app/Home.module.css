@@ -1,55 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @font-face {
   font-display: optional;
   font-family: Netflix Sans;
   font-weight: 100;
-  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff2) format("woff2"),
-    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff) format("woff")
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff2)
+      format("woff2"),
+    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff)
+      format("woff");
 }
 
 @font-face {
   font-display: optional;
   font-family: Netflix Sans;
   font-weight: 300;
-  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Lt.woff2) format("woff2"),
-    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Lt.woff) format("woff")
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Lt.woff2)
+      format("woff2"),
+    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Lt.woff)
+      format("woff");
 }
 
 @font-face {
   font-display: optional;
   font-family: Netflix Sans;
   font-weight: 400;
-  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Rg.woff2) format("woff2"),
-    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Rg.woff) format("woff")
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Rg.woff2)
+      format("woff2"),
+    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Rg.woff)
+      format("woff");
 }
 
 @font-face {
   font-display: optional;
   font-family: Netflix Sans;
   font-weight: 500;
-  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Md.woff2) format("woff2"),
-    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Md.woff) format("woff")
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Md.woff2)
+      format("woff2"),
+    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Md.woff)
+      format("woff");
 }
 
 @font-face {
   font-display: optional;
   font-family: Netflix Sans;
   font-weight: 700;
-  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Bd.woff2) format("woff2"),
-    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Bd.woff) format("woff")
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Bd.woff2)
+      format("woff2"),
+    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Bd.woff)
+      format("woff");
 }
 
 @font-face {
   font-display: optional;
   font-family: Netflix Sans;
   font-weight: 900;
-  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff2) format("woff2"),
-    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff) format("woff")
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff2)
+      format("woff2"),
+    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff)
+      format("woff");
 }
 
 .PedroFlix_sans_font_loaded {
-  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
-  color: #FFF;
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+    sans-serif;
+  color: #fff;
 }
 
 @media (max-width: 3000px) {
@@ -65,7 +78,22 @@
     margin: 0 auto -7.5rem auto;
     position: relative;
     z-index: 2;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8000) 0.000%, rgba(0, 0, 0, 0.7889) 8.333%, rgba(0, 0, 0, 0.7556) 16.67%, rgba(0, 0, 0, 0.7000) 25.00%, rgba(0, 0, 0, 0.6222) 33.33%, rgba(0, 0, 0, 0.5222) 41.67%, rgba(0, 0, 0, 0.4000) 50.00%, rgba(0, 0, 0, 0.2778) 58.33%, rgba(0, 0, 0, 0.1778) 66.67%, rgba(0, 0, 0, 0.1000) 75.00%, rgba(0, 0, 0, 0.04444) 83.33%, rgba(0, 0, 0, 0.01111) 91.67%, rgba(0, 0, 0, 0.000) 100.0%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.7889) 8.333%,
+      rgba(0, 0, 0, 0.7556) 16.67%,
+      rgba(0, 0, 0, 0.7) 25%,
+      rgba(0, 0, 0, 0.6222) 33.33%,
+      rgba(0, 0, 0, 0.5222) 41.67%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.2778) 58.33%,
+      rgba(0, 0, 0, 0.1778) 66.67%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.04444) 83.33%,
+      rgba(0, 0, 0, 0.01111) 91.67%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
   .header {
@@ -86,7 +114,7 @@
   .header_logo_title {
     font-family: Bebas Neue;
     font-size: 60px;
-    color: #E50914;
+    color: #e50914;
   }
 
   .header_buttons_content {
@@ -103,7 +131,7 @@
     position: relative;
   }
 
-  .header_language>svg {
+  .header_language > svg {
     position: absolute;
     pointer-events: none;
     top: 7px;
@@ -135,9 +163,9 @@
     position: relative;
   }
 
-  .header_language>select {
+  .header_language > select {
     background-color: transparent;
-    color: #FFF;
+    color: #fff;
     appearance: none;
     font-family: inherit;
     padding: 4px 36px;
@@ -160,13 +188,22 @@
   }
 
   .background_shadow {
-    background-image: linear-gradient(360deg, rgba(0, 0, 0, 0.8500) 8.000%, 
-    rgba(0, 0, 0, 0.8465) 15.67%, rgba(0, 0, 0, 0.8361) 23.33%, 
-    rgba(0, 0, 0, 0.8187) 31.00%, rgba(0, 0, 0, 0.7944) 38.67%, 
-    rgba(0, 0, 0, 0.7632) 46.33%, rgba(0, 0, 0, 0.7250) 54.00%,
-     rgba(0, 0, 0, 0.6868) 61.67%, rgba(0, 0, 0, 0.6556) 69.33%, 
-     rgba(0, 0, 0, 0.6312) 77.00%, rgba(0, 0, 0, 0.6139) 84.67%,
-      rgba(0, 0, 0, 0.6035) 92.33%, rgba(0, 0, 0, 0.6000) 100.0%);
+    background-image: linear-gradient(
+      360deg,
+      #000000d9 8%,
+      #000000d8 15.67%,
+      #000000d5 23.33%,
+      #00000096 31%,
+      #0000009c 38.67%,
+      #00000085 46.33%,
+      #00000080 54%,
+      #00000085 61.67%,
+      #0000006e 69.33%,
+      #00000080 77%,
+      #00000091 84.67%,
+      #000000ab 92.33%,
+      #000000a6 9%
+    );
     position: absolute;
     top: 0;
     right: 0;
@@ -262,7 +299,7 @@
   .main_form_input {
     position: relative;
     flex: 1 1 auto;
-    width: 100%
+    width: 100%;
   }
 
   .form_title {
@@ -284,7 +321,6 @@
     top: 16px;
     left: 16px;
     pointer-events: none;
-    
   }
 
   .form_label_active {
@@ -299,7 +335,6 @@
     left: 16px;
     font-family: inherit;
     pointer-events: none;
-    
   }
 
   .form_validate_active {
@@ -318,11 +353,11 @@
   .form_input:focus,
   .form_email_false:focus,
   .form_email_true:focus {
-    outline: 2px solid #FFF;
+    outline: 2px solid #fff;
     border-radius: 4px;
     outline-offset: 2px;
     color: WHITE;
-    }
+  }
 
   .form_email_true_text {
     display: none;
@@ -365,7 +400,7 @@
     border-radius: 4px;
     padding: 26px 16px 8px;
     color: white;
-    outline-color: #FFFFFF;
+    outline-color: #ffffff;
     line-height: 1.8;
     font: inherit;
     background-color: rgba(22, 22, 22, 0.7);
@@ -420,7 +455,12 @@
   .curve_container {
     width: 120%;
     left: -10%;
-    background: radial-gradient(50% 500% at 50% -420%, rgba(64, 97, 231, 0.4) 80%, rgba(0, 0, 0, 0.1) 100%), black;
+    background: radial-gradient(
+        50% 500% at 50% -420%,
+        rgba(64, 97, 231, 0.4) 80%,
+        rgba(0, 0, 0, 0.1) 100%
+      ),
+      black;
     height: 100%;
     box-sizing: border-box;
     position: absolute;
@@ -431,21 +471,28 @@
     align-items: center;
     border-top-left-radius: 50% 100%;
     border-top-right-radius: 50% 100%;
-    border: solid .25rem transparent;
+    border: solid 0.25rem transparent;
     background-clip: padding-box;
   }
 
   .curve_container::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     z-index: -1;
-    margin-top: -.25rem;
+    margin-top: -0.25rem;
     border-radius: inherit;
-    background: linear-gradient(to right, rgba(33, 13, 22, 1) 16%, rgba(184, 40, 105, 1), rgba(229, 9, 20, 1), rgba(184, 40, 105, 1), rgba(33, 13, 22, 1) 84%);
+    background: linear-gradient(
+      to right,
+      rgba(33, 13, 22, 1) 16%,
+      rgba(184, 40, 105, 1),
+      rgba(229, 9, 20, 1),
+      rgba(184, 40, 105, 1),
+      rgba(33, 13, 22, 1) 84%
+    );
   }
   .card_one,
   .card_two,
@@ -479,7 +526,6 @@
 
   .card_one_moldure {
     position: relative;
-    
   }
 
   .card_one_image,
@@ -552,7 +598,8 @@
     background-size: 100% !important;
     width: 48px;
     height: 48px;
-    background: url('https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/download-icon.gif') center center no-repeat;
+    background: url("https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/download-icon.gif")
+      center center no-repeat;
   }
 
   .card_four_small_image {
@@ -668,7 +715,7 @@
     margin-bottom: 20px;
   }
 
-  .footer_info>li {
+  .footer_info > li {
     flex: 0 0 calc(25% - 0.75rem);
     list-style: none;
     color: rgba(255, 255, 255, 0.7);
@@ -706,7 +753,7 @@
   }
 }
 
-@media (max-width:1600px) {
+@media (max-width: 1600px) {
   .questions_subtitle,
   .questions_button {
     padding: 14px;
@@ -736,7 +783,7 @@
   .header_logo_title {
     font-size: 50px;
   }
-  .active_icon, 
+  .active_icon,
   .desactive_icon {
     display: none;
   }
@@ -905,7 +952,7 @@
     padding: 8px 10px;
     overflow-x: hidden;
   }
-  .card_one_video > video{
+  .card_one_video > video {
     width: 100%;
   }
   .card_two_video {
@@ -924,7 +971,7 @@
     left: 14%;
   }
   .card_four_small_image {
-    display: none
+    display: none;
   }
   .card_four_gif_text,
   .card_four_gif_title {

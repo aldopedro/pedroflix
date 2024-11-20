@@ -19,7 +19,7 @@ function RegisterBr() {
                 <h6 className={styles.stepDescription}>A Pedroflix é personalizada para você. Crie uma senha para começar a assistir à Pedroflix.</h6>
                 <button className={styles.stepButton} onClick={nextStep} >Próximo</button>
             </section>
-            <RegistrationFooter language="pt" languageStep="en1"/>
+            <RegistrationFooter language="pt" languageStep="registerEN"/>
         </div>
     )
 } 

@@ -19,7 +19,7 @@ function RegisterEn() {
                 <h6 className={style.stepDescription}>Netflix is personalized for you. Create a password to start watching <br/>Pedroflix.</h6>
                 <button className={style.stepButton} onClick={nextStep} >Next</button>
             </section>
-            <RegistrationFooter language="en" languageStep="pt1"/>
+            <RegistrationFooter language="en" languageStep="registerBR"/>
         </div>
     )
 } 

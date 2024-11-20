@@ -8,19 +8,20 @@ interface Prop {
 
 function RegistrationFooter(language: Prop) {
     function portChange(languageStep: Prop) {
-        if (languageStep.languageStep === "pt2") {
+        if (languageStep.languageStep === "formBR") {
             router.push("/register/form")
-        } else if (languageStep.languageStep === "pt1") {
+        } else if (languageStep.languageStep === "registerBR") {
             router.push('/register/br')
         }
     }
     function englishChange(language: Prop) {
-        if (language.languageStep === "en2") {
+        if (language.languageStep === "formEN") {
             router.push('/register/formEN')
-        } else if (language.languageStep === "en1") {
+        } else if (language.languageStep === "registerEN") {
             router.push('/register/en')
         }
     }
+    
     const router = useRouter()
     if (language.language === "pt") {
         return (
@@ -30,7 +31,6 @@ function RegistrationFooter(language: Prop) {
                     <ul className={styles.footerLink}>
                         <li className={styles.footerLinkItem}>Perguntas frequentes</li>
                         <li className={styles.footerLinkItem}>Central de Ajuda</li>
-                        <li className={styles.footerLinkItem}>Pedroflix Shop</li>
                         <li className={styles.footerLinkItem}>Termos de Uso</li>
                         <li className={styles.footerLinkItem}>Privacidade</li>
                         <li className={styles.footerLinkItem}>Preferências de cookies</li>
@@ -53,7 +53,6 @@ function RegistrationFooter(language: Prop) {
                     <ul className={styles.footerLink}>
                         <li className={styles.footerLinkItem}>FAQ</li>
                         <li className={styles.footerLinkItem}>Help Center</li>
-                        <li className={styles.footerLinkItem}>Pedroflix Shop</li>
                         <li className={styles.footerLinkItem}>Terms of Use</li>
                         <li className={styles.footerLinkItem}>Privacy</li>
                         <li className={styles.footerLinkItem}>Cookie Preferences</li>
