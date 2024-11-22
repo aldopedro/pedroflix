@@ -79,7 +79,9 @@
 }
 
 .formEmail,
-.formPassword {
+.formPassword,
+.formEmailToggle,
+.formPasswordToggle {
   position: absolute;
   top: 16px;
   left: 16px;
@@ -96,7 +98,6 @@
 }
 
 .formInput,
-.formInputGreen,
 .formInputRed {
   border: 1px solid #737373;
   background: rgba(22, 22, 22, 0.7);
@@ -105,13 +106,20 @@
   padding: 24px 16px 8px;
   color: white;
   width: 100%;
+  font-size: 16px;
+  
 }
 
-.formInputGreen {
-  border: 1px solid #1eff00 !important;
+
+.formInput:focus,
+.formInputRed:focus{
+  outline: 2px solid #FFF;
+  outline-offset: 2px;
+  outline-color: white;
 }
+
 .formInputRed {
-  border: 1px solid rgb(229, 9, 20) !important;
+  border: 1px solid #eb3942;
 }
 
 .formButton {
@@ -126,6 +134,13 @@
   transition-timing-function: cubic-bezier(0.9, 0, 0.51, 1);
   white-space: nowrap;
   color: white;
+}
+
+.formEmailToggle,
+.formPasswordToggle {
+  font-size: 12px;
+  top: 6px;
+  position: absolute
 }
 
 .rememberPassword {

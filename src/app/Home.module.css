@@ -224,7 +224,6 @@
 
   .header_login {
     margin-left: 10px;
-    font: inherit;
     display: flex;
     align-items: center;
     min-height: 24px;
