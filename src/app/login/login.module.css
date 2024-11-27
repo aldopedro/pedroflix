@@ -168,6 +168,16 @@
   padding-left: 12px;
 }
 
+.formPasswordInfo {
+  display: none;
+}
+
+.formPasswordInfoFalse {
+  color: #e50914;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
 .backToHome {
   display: flex;
   color: #737373;

@@ -14,9 +14,13 @@ export default function Login() {
     const [emailTextToggle, setEmailTextToggle] = useState<boolean>(false)
     const [emailValue, setEmailValue] = useState<string>()
     const [activeValidationRed, setActiveValidationRed] = useState<boolean>()
-    const [passwordBorderToggle, setPasswordBorderToggle] = useState<boolean>()
+    const [passwordBorderToggle, setPasswordBorderToggle] = useState<boolean>(true)
     const [passwordTextToggle, setPasswordTextToggle] = useState<boolean>(false)
     const [passwordValue, setPasswordValue] = useState<string>()
+    const [users, setUser] = useState({
+        email: '',
+        password: ''
+      })
     function validateEmail(email: string) {
         const validate = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
         if (!validate.test(email)) {
@@ -26,6 +30,7 @@ export default function Login() {
         } else {
             setEmailBorderToggle(true);
             setEmailValue(email);
+            setUser({...users, email: `${emailValue}`});
             return true;
         }
     }
@@ -38,6 +43,7 @@ export default function Login() {
         } else {
             setPasswordBorderToggle(true);
             setPasswordValue(pass);
+            setUser({...users, password: `${passwordValue}`});
             return true;
         }
     }
@@ -61,6 +67,26 @@ export default function Login() {
         }
         setActiveValidationRed(true)
     }
+    function onClickPassword () {
+        setPasswordTextToggle(true)
+        setPasswordBorderToggle(true)
+        setActiveValidationRed(false)
+    }
+    function onClickEmail () {
+        setEmailTextToggle(true)
+        setEmailBorderToggle(true)
+        setActiveValidationRed(false)
+    }
+    async function login (e:React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
+        e.preventDefault()
+        const result = await fetch ('http://localhost:8081/login', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json", "Acess-Control-Allow-Origin": "*", },
+            body: JSON.stringify(users)
+        }).then()
+        console.log(await result.json())
+    }
+
     return (
         <div>
             <div className={styles.overlay}>
@@ -76,14 +102,14 @@ export default function Login() {
             </div>
             <div className={styles.loginForm}>
                 <h4 className={styles.formTitle}>Entrar</h4>
-                <form className={styles.form}>
+                <form className={styles.form} action="" onSubmit={async (e) => await login(e)} method="post">
                     <div className={styles.mainFormInput}>
                         <p className={emailTextToggle === false ? styles.formEmail : styles.formEmailToggle}>Email</p>
                         <input
                             className={emailBorderToggle === false && emailValue != "" && activeValidationRed === true ? styles.formInputRed : styles.formInput}
                             onChange={e => validateEmail(e.target.value)}
                             onBlur={(e) => blurEmail(e.target.value)}
-                            onClick={() => setEmailTextToggle(true)}
+                            onClick={() => onClickEmail()}
                             type="email"
                             name="email"
                             id="email" />
@@ -94,13 +120,13 @@ export default function Login() {
                             className={passwordBorderToggle === false && passwordValue != "" && activeValidationRed === true ? styles.formInputRed : styles.formInput}
                             onChange={e => validatePassword(e.target.value)}
                             onBlur={(e) => blurPassword(e.target.value)}
-                            onClick={() => setPasswordTextToggle(true)}
+                            onClick={() => onClickPassword()}
                             type="password"
                             name="password"
                             id="password" />
-                            <p>A senha deve ter entre 4 e 60 caracteres</p>
+                            <p className={passwordBorderToggle === false && activeValidationRed === true ? styles.formPasswordInfoFalse : styles.formPasswordInfo} >A senha deve ter entre 4 e 60 caracteres</p>
                     </div>
-                    <button className={styles.formButton}>Entrar</button>
+                    <button className={styles.formButton} type="submit" onClick={login}>Entrar</button>
                     <Link className={styles.rememberPassword} href="/loginHelp">Esqueceu a senha?</Link>
                     <div className={styles.mainRemember}>
                         <div></div>

@@ -41,5 +41,22 @@ app.post('/add_user', async (req, res) => {
         })
     }
 })
+app.post('/login', async (req, res) => {
+    const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+    const email = (req.body.email)
+    const password = (req.body.password)
+    
+    if (emailRegex.test(email)) {
+        con.query(`SELECT * FROM users WHERE email = ?`, [email],(err, result) => {
+            con.query(`SELECT * FROM users WHERE password = ?`, [password], (err1, result1) => {
+                if (result[0] === undefined || result1[0] === undefined) {
+                    console.log("nao deu certo")
+                } else console.log("deu certo.")
+            })
+        })
+    }
+})
+
+
 
 app.listen(8081);
