@@ -4,9 +4,9 @@ const dotenv = require('dotenv')
 dotenv.config()
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const app = express();
 
 
-const session = {}
 const con = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -14,29 +14,20 @@ const con = mysql.createConnection({
     database: process.env.DB_NAME
 })
 con.connect()
-var app = express();
 app.use(express.json())
 app.use(cookieParser())
 const corsOptions = {
-    origin: "*",
+    origin: "http://localhost:3000",
+    credentials: true,
     optionsSuccessStatus: 200,
 };
-const teste = function (req, res, next) {
 
-    console.log("testou")
-    next()
-}
 app.use(cors(corsOptions))
 
 app.get('/', (req, res) => {
     con.query("SELECT * FROM users", (err, result) => {
         res.send(result);
     })
-})
-
-app.get('/set-cookie', (req, res) => {
-
-    return res.json()
 })
 
 app.post('/add_user', async (req, res) => {
@@ -56,8 +47,7 @@ app.post('/add_user', async (req, res) => {
 })
 
 
-
-app.post('/login', async (req, res) => {
+app.post('/login' ,cors(corsOptions), async (req, res) => {
     const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
     const email = (req.body.email)
     const password = (req.body.password)
@@ -68,17 +58,36 @@ app.post('/login', async (req, res) => {
                 if (result[0] === undefined || result1[0] === undefined) {
                     console.log("nao deu certo")
                     return res.json("false")
-                } else 
-                console.log("deu certo.")
-                res.cookie("teste","teste", {
-                    maxAge: 1* 60 * 60
+                } else
+                res.cookie("teste", "teste", {
+                    maxAge: (2000*60),
+                    domain:"localhost",
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'None',
                 })
+                
                 return res.json("true")
             })
         })
     }
 })
 
+function autorizeCookie(req, res, next) {
+    const authorizedCookie = req.cookies['teste'];
+    if (authorizedCookie === 'teste') {
+        return next();
+    } else {
+        console.log('Cookie não autorizado:', req.cookies);
+        return res.status(403).send('Forbidden: Unauthorized cookie');
+    }
+}
 
+
+app.get("/validate", autorizeCookie, (req, res) => {
+    var cookie = req.headers.cookie;
+    console.log('Cookies recebidos:', cookie);
+    return res.json({ cookies: cookie });
+  });
 
 app.listen(8081);

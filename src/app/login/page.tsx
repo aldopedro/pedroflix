@@ -81,6 +81,7 @@ export default function Login() {
         e.preventDefault()
         const result = await fetch ('http://localhost:8081/login', {
             method: 'POST',
+            credentials: 'include',
             headers: { "Content-Type": "application/json", "Acess-Control-Allow-Origin": "*", },
             body: JSON.stringify(users)
         }).then()
