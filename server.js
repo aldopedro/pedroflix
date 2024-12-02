@@ -63,8 +63,7 @@ app.post('/login' ,cors(corsOptions), async (req, res) => {
                     maxAge: (2000*60),
                     domain:"localhost",
                     httpOnly: true,
-                    secure: true,
-                    sameSite: 'None',
+                    secure: true
                 })
                 
                 return res.json("true")
