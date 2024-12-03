@@ -70,6 +70,7 @@ export default function Login() {
                 setLoginValidate(false);
             }
         } catch (error) {
+            console.log(error)
             setLoginValidate(false);
         }
     }
