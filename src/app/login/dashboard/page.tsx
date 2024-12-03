@@ -1,5 +1,6 @@
 'use client'; 
 
+import { redirect } from "next/navigation"
 import { useState, useEffect } from "react";
 
 async function fetchData() {
@@ -47,6 +48,6 @@ export default function Dashboard() {
   if (data) {
     return <div>Positivo</div>; 
   } else {
-    return <div>Negativo</div>; 
+    return redirect("/login")
   }
 }

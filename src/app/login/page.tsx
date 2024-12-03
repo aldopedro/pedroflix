@@ -10,83 +10,70 @@ import { useState } from "react"
 
 
 export default function Login() {
-    const [emailBorderToggle, setEmailBorderToggle] = useState<boolean>()
     const [emailTextToggle, setEmailTextToggle] = useState<boolean>(false)
     const [emailValue, setEmailValue] = useState<string>()
-    const [activeValidationRed, setActiveValidationRed] = useState<boolean>()
-    const [passwordBorderToggle, setPasswordBorderToggle] = useState<boolean>(true)
     const [passwordTextToggle, setPasswordTextToggle] = useState<boolean>(false)
     const [passwordValue, setPasswordValue] = useState<string>()
+    const [loginValidate, setLoginValidate] = useState<boolean>(true)
+
     const [users, setUser] = useState({
         email: '',
         password: ''
-      })
+    })
     function validateEmail(email: string) {
-        const validate = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-        if (!validate.test(email)) {
-            setEmailValue(email);
-            setEmailBorderToggle(false);
-            return false;
-        } else {
-            setEmailBorderToggle(true);
-            setEmailValue(email);
-            setUser({...users, email: `${emailValue}`});
-            return true;
-        }
+        setEmailValue(email);
+        setUser({ ...users, email: `${emailValue}` });
+        return true;
     }
     function validatePassword(pass: string) {
-        const validate = new RegExp (/^[0-9a-zA-Z$*&@#]{4,}$/)
-        if (!validate.test(pass)) {
-            setPasswordValue(pass);
-            setPasswordBorderToggle(false);
-            return false;
-        } else {
-            setPasswordBorderToggle(true);
-            setPasswordValue(pass);
-            setUser({...users, password: `${passwordValue}`});
-            return true;
-        }
+        setPasswordValue(pass);
+        setUser({ ...users, password: `${passwordValue}` });
+        return true;
     }
-    function blurEmail (value: string) {
+    function blurEmail(value: string) {
         if (validateEmail(value) === true && value != "") {
             setEmailTextToggle(true)
-        }else if (value === "") {
-            setEmailTextToggle(false)    
-        } else if (validateEmail(value) === false) {
-            setEmailBorderToggle(false)
+        } else if (value === "") {
+            setEmailTextToggle(false)
         }
-        setActiveValidationRed(true)
     }
-    function blurPassword (value: string) {
+    function blurPassword(value: string) {
         if (validatePassword(value) === true && value != "") {
             setPasswordTextToggle(true)
-        }else if (value === "") {
-            setPasswordTextToggle(false)    
-        } else if (validatePassword(value) === false) {
-            setPasswordBorderToggle(false)
+        } else if (value === "") {
+            setPasswordTextToggle(false)
         }
-        setActiveValidationRed(true)
     }
-    function onClickPassword () {
+    function onClickPassword() {
         setPasswordTextToggle(true)
-        setPasswordBorderToggle(true)
-        setActiveValidationRed(false)
     }
-    function onClickEmail () {
+    function onClickEmail() {
         setEmailTextToggle(true)
-        setEmailBorderToggle(true)
-        setActiveValidationRed(false)
     }
-    async function login (e:React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
+    async function login(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
-        const result = await fetch ('http://localhost:8081/login', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { "Content-Type": "application/json", "Acess-Control-Allow-Origin": "*", },
-            body: JSON.stringify(users)
-        }).then()
-        console.log(await result.json())
+        try {
+            const result = await fetch('http://localhost:8081/login', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+                body: JSON.stringify(users)
+            });
+
+            const responseBody = await result.json();
+            if (result.ok && responseBody.success) {
+                window.location.href = ('/login/dashboard');
+            } else {
+                setLoginValidate(false);
+            }
+        } catch (error) {
+            setLoginValidate(false);
+        }
     }
+
 
     return (
         <div>
@@ -103,11 +90,12 @@ export default function Login() {
             </div>
             <div className={styles.loginForm}>
                 <h4 className={styles.formTitle}>Entrar</h4>
+                <p className={loginValidate === false ? styles.toggleFalse : styles.toggleTrue}>Email ou senha incorreto, você pode redefinir sua senha ou tentar novamente.</p>
                 <form className={styles.form} action="" onSubmit={async (e) => await login(e)} method="post">
                     <div className={styles.mainFormInput}>
                         <p className={emailTextToggle === false ? styles.formEmail : styles.formEmailToggle}>Email</p>
                         <input
-                            className={emailBorderToggle === false && emailValue != "" && activeValidationRed === true ? styles.formInputRed : styles.formInput}
+                            className={styles.formInput}
                             onChange={e => validateEmail(e.target.value)}
                             onBlur={(e) => blurEmail(e.target.value)}
                             onClick={() => onClickEmail()}
@@ -118,14 +106,13 @@ export default function Login() {
                     <div className={styles.mainFormInput}>
                         <p className={passwordTextToggle === false ? styles.formPassword : styles.formPasswordToggle}>Senha</p>
                         <input
-                            className={passwordBorderToggle === false && passwordValue != "" && activeValidationRed === true ? styles.formInputRed : styles.formInput}
+                            className={styles.formInput}
                             onChange={e => validatePassword(e.target.value)}
                             onBlur={(e) => blurPassword(e.target.value)}
                             onClick={() => onClickPassword()}
                             type="password"
                             name="password"
                             id="password" />
-                            <p className={passwordBorderToggle === false && activeValidationRed === true ? styles.formPasswordInfoFalse : styles.formPasswordInfo} >A senha deve ter entre 4 e 60 caracteres</p>
                     </div>
                     <button className={styles.formButton} type="submit" onClick={login}>Entrar</button>
                     <Link className={styles.rememberPassword} href="/loginHelp">Esqueceu a senha?</Link>
@@ -138,7 +125,6 @@ export default function Login() {
                     <p className={styles.backToHome}>Novo por aqui? <Link className={styles.backToHomeLink} href="/"> Assine agora</Link>.</p>
                 </form>
             </div>
-            <div className={styles.preFooter}></div>
             <div className={styles.footer}>
                 <Footer language="pt" languageStep="en1" />
             </div>

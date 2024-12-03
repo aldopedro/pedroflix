@@ -51,26 +51,39 @@
   color: #e50914;
 }
 
+.toggleTrue {
+  display: none;
+}
+.toggleFalse {
+  background-color: rgb(216, 157, 49);
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  padding: 16px;
+  margin-bottom: 2rem;
+  border-radius: 4px;
+}
+
 .loginForm {
-    background-color: rgba(0,0,0,0.7);
-    display: flex;
-    flex-direction: column;
-    padding: 48px 68px 280px;
-    max-width: 450px;
-    margin: auto;
-    border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  padding: 48px 68px 262px;
+  max-width: 450px;
+  margin: auto;
+  border-radius: 4px;
 }
 
 .formTitle {
-    color: white;
-    font-size: 2rem;
-    margin-bottom: 28px;
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 28px;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .mainFormInput {
@@ -97,8 +110,7 @@
   font-size: 16px;
 }
 
-.formInput,
-.formInputRed {
+.formInput {
   border: 1px solid #737373;
   background: rgba(22, 22, 22, 0.7);
   border-radius: 0.25rem;
@@ -107,19 +119,12 @@
   color: white;
   width: 100%;
   font-size: 16px;
-  
 }
 
-
-.formInput:focus,
-.formInputRed:focus{
-  outline: 2px solid #FFF;
+.formInput:focus {
+  outline: 2px solid #fff;
   outline-offset: 2px;
   outline-color: white;
-}
-
-.formInputRed {
-  border: 1px solid #eb3942;
 }
 
 .formButton {
@@ -140,7 +145,7 @@
 .formPasswordToggle {
   font-size: 12px;
   top: 6px;
-  position: absolute
+  position: absolute;
 }
 
 .rememberPassword {
@@ -192,39 +197,31 @@
   text-decoration: underline;
 }
 
-.preFooter {
-  margin-top: 102px;
-  height: 100px;
-  width: 100%;
-  background-image: linear-gradient(rgba(0,0,0,0.7) 0%, rgb(0,0,0) 20%);
-}
-
 .footer {
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  
 }
 
 .footer :first-child {
-    background-color: black;
-    border:none;
+  background-color: black;
+  border: none;
 }
 
 .footer :first-child > div::after {
-    display: none;
+  display: none;
 }
 
 .footer :first-child > div > select,
-.footer :first-child > div::before{
-    color: white;
+.footer :first-child > div::before {
+  color: white;
 }
 
 .footer :first-child > div > select {
   border: 1px solid #737373;
 }
 
-.footer :first-child > ul > li{
-    text-decoration: underline #737373;
+.footer :first-child > ul > li {
+  text-decoration: underline #737373;
 }
