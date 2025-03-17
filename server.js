@@ -1,12 +1,12 @@
 const express = require("express");
-var mysql = require("mysql");
+var { Pool } = require("pg");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
 
-const con = mysql.createConnection({
+const con = Pool.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
