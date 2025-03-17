@@ -13,7 +13,7 @@ function RegisterForm() {
     e.preventDefault();
     if (emailCorrect === 2 && correctBorder === true) {
       try {
-        const result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_user`, {
+        const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/add_user`, {
           method: 'POST',
           headers: { 
             "Content-Type": "application/json", 
