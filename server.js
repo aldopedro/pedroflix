@@ -101,5 +101,4 @@ app.get("/validate", autorizeCookie, (req, res) => {
   return res.json({ cookies: cookie });
 });
 
-app.listen(8081);
-module.exports = con
+app.listen(process.env.MYSQL_PORT);
