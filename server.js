@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 
-const urlDB = `mysql://${process.env.MYSQL_USER}:${process.env.MYSQL_PASSWORD}@${process.env.MYSQL_HOST}:${process.env.MYSQL_PORT}/${process.MYSQL_DATABASE}`
+const urlDB = `mysql://${process.env.MYSQL_USER}:${process.env.MYSQL_PASSWORD}@${process.env.MYSQL_HOST}:${process.env.MYSQL_PORT}/${process.env.MYSQL_DATABASE}`
 
 const con = mysql.createConnection(urlDB)
 
