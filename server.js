@@ -32,18 +32,25 @@ app.post("/add_user", async (req, res) => {
   const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
   const email = req.body.email;
   const password = req.body.password;
-  console.log(json.parse(email))
   if (emailRegex.test(email)) {
     con.query(`SELECT * FROM users WHERE email = ?`, [email], (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: 'Erro na consulta ao banco de dados' });
+      }
       const validateEmail = result[0];
       if (validateEmail === undefined) {
-        con.query(`INSERT INTO users (email, password) VALUES (?, ?)`, [
-          email,
-          password,
-        ]);
-        return res.json("false");
-      } else return res.json("true");
+        con.query(`INSERT INTO users (email, password) VALUES (?, ?)`, [email, password], (insertErr) => {
+          if (insertErr) {
+            return res.status(500).json({ error: 'Erro ao inserir o usuário' });
+          }
+          return res.json({ emailExists: false });
+        });
+      } else {
+        return res.json({ emailExists: true });
+      }
     });
+  } else {
+    return res.status(400).json({ error: 'Email inválido' });
   }
 });
 

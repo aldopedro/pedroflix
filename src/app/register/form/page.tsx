@@ -10,14 +10,25 @@ function RegisterForm() {
 
 
   async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
-    e.preventDefault()
+    e.preventDefault();
     if (emailCorrect === 2 && correctBorder === true) {
-      const result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_user`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json", "Acess-Control-Allow-Origin": "*", },
-        body: JSON.stringify(user)
-      }).then()
-      setEmailExist(await result.json())
+      try {
+        const result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_user`, {
+          method: 'POST',
+          headers: { 
+            "Content-Type": "application/json", 
+            "Access-Control-Allow-Origin": "*" 
+          },
+          body: JSON.stringify(user)
+        });
+        if (!result.ok) {
+          throw new Error('Erro na resposta do servidor');
+        }
+        const responseData = await result.json();
+        setEmailExist(responseData);
+      } catch (error) {
+        console.error('Erro ao validar o usuário:', error);
+      }
     }
   }
 
