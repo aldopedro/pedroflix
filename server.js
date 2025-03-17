@@ -6,13 +6,11 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
 
-const con = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
-});
+
+const urlDB = `mysql://${process.env.MYSQL_USER}:${process.env.MYSQL_PASSWORD}@${process.env.MYSQL_HOST}:${process.env.MYSQL_PORT}/${process.MYSQL_DATABASE}`
+
+const con = mysql.createConnection(urlDB)
+
 con.connect();
 app.use(express.json());
 app.use(cookieParser());
@@ -95,4 +93,5 @@ app.get("/validate", autorizeCookie, (req, res) => {
   return res.json({ cookies: cookie });
 });
 
-app.listen(3306);
+app.listen(8081);
+module.exports = con
