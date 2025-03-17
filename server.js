@@ -32,6 +32,7 @@ app.post("/add_user", async (req, res) => {
   const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
   const email = req.body.email;
   const password = req.body.password;
+  console.log(json.parse(email))
   if (emailRegex.test(email)) {
     con.query(`SELECT * FROM users WHERE email = ?`, [email], (err, result) => {
       const validateEmail = result[0];
