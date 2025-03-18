@@ -70,7 +70,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
           } else
             res.cookie("teste", "teste", {
               maxAge: 2000 * 60,
-              domain: "localhost",
+              domain: ".vercel.app",
               httpOnly: true,
               secure: true,
               sameSite: "None"
