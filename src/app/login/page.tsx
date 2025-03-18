@@ -53,7 +53,7 @@ export default function Login() {
     async function login(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         try {
-            const result = await fetch('http://localhost:8081/login', {
+            const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/validate`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
