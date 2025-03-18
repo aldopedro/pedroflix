@@ -62,7 +62,6 @@ app.post("/login", cors(corsOptions), async (req, res) => {
         [password],
         (err1, result1) => {
           if (result[0] === undefined || result1[0] === undefined) {
-            console.log("nao deu certo");
             return res.status(401).json ({
                 success:false,
                 message: 'Credenciais inválidas'

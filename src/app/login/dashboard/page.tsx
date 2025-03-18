@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import { useState, useEffect } from "react";
 
 async function fetchData() {
-  const response = await fetch("http://localhost:8081/validate", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/validate`, {
     method: "GET",
     credentials: 'include', 
     mode: 'cors',

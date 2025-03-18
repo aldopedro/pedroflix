@@ -19,10 +19,10 @@ DB_NAME=*Nome da database
 - [x] Express
 - [x] Typescript
 - [x] MySQL
+- [X] Utilizar armazenamento na nuvem
 
 Futuras tecnologias:
 - [] JWT - para validação de login
 - [] Bcrypt Hash - para encriptação de senha
 - [] Implantação de cards e player
-- [] Utilizar armazenamento na nuvem
 - [] Testes Unitários

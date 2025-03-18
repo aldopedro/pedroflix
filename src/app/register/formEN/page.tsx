@@ -10,7 +10,7 @@ function FormEN () {
     async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if (emailCorrect === 2 && correctBorder === true) {
-          const result = await fetch('http://localhost:8081/add_user', {
+          const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/add_user`, {
             method: 'POST',
             headers: { "Content-Type": "application/json", "Acess-Control-Allow-Origin": "*", },
             body: JSON.stringify(user)
