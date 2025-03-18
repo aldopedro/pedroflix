@@ -100,7 +100,7 @@ app.get("/validate", autorizeCookie, (req, res) => {
   return res.json({ cookies: cookie });
 });
 
-const port = process.env.PORT || 8081;
-app.listen(port, () => {
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server is running on port ${port}`);
 });
