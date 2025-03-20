@@ -58,6 +58,7 @@ export default function Login() {
                 credentials: 'include',
                 headers: {
                     "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*"
                     },
                 body: JSON.stringify(users)
             });
