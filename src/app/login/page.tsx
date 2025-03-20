@@ -62,7 +62,11 @@ export default function Login() {
                     },
                 body: JSON.stringify(users)
             });
-
+            if (!result.ok) {
+                console.error('Erro na requisição:', result.statusText);
+                setLoginValidate(false);
+                return;
+            }
             const responseBody = await result.json();
             if (responseBody.success) {
                 window.location.href = ('/login/dashboard');
