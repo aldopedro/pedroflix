@@ -64,7 +64,7 @@ export default function Login() {
             });
 
             const responseBody = await result.json();
-            if (result.ok && responseBody.success) {
+            if (responseBody.success) {
                 window.location.href = ('/login/dashboard');
             } else {
                 setLoginValidate(false);
