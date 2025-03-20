@@ -56,11 +56,7 @@ app.post("/add_user", async (req, res) => {
 app.post("/login", cors(corsOptions), async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-    con.query(`SELECT * FROM users WHERE email = ?`, [email], (err, result) => {
-      con.query(
-        `SELECT * FROM users WHERE password = ?`,
-        [password],
-        (err1, result1) => {
+  con.query(`SELECT * FROM users WHERE email = ? AND password = ?`, [email],[password], (err, result) => {
           if (result[0] === undefined || result1[0] === undefined) {
             return res.status(401).json ({
                 success:false,
@@ -80,7 +76,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
               return res.json({auth:true, sucess:true, message:"Autenticado com sucesso!"})
             }
           })
-      })});
+      });
 
 function verifyJWT (req, res, next) {
   const token = req.headers['x-acess-token']
