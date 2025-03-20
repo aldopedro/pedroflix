@@ -14,7 +14,7 @@ const con = mysql.createConnection(urlDB)
 con.connect();
 app.use(express.json());
 const corsOptions = {
-  origin: "*",
+  origin: "https://pedroflix-five.vercel.app",
   credentials: true,
   optionsSuccessStatus: 200,
 };
