@@ -73,7 +73,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
                 partitioned: true
               })
               
-              return res.json({auth:true, sucess:true, message:"Autenticado com sucesso!"})
+              return res.status(200).json({auth:true, sucess:true, message:"Autenticado com sucesso!"})
             }
           })
       });
