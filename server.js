@@ -71,7 +71,9 @@ app.post("/login", cors(corsOptions), async (req, res) => {
               res.cookie('jwt_token', token, {
                 httpOnly: true,
                 maxAge: 300 * 1000,
-                sameSite: "None"
+                sameSite: "None",
+                secure: true,
+                path: '/'
               })
               
               return res.send(200).json({auth:true, sucess:true, message:"Autenticado com sucesso!"})
