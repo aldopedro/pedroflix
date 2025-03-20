@@ -63,7 +63,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
                 message: 'Credenciais inválidas'
               })
             } else {
-              const token = jwt.sign({name: email}, process.env.SECRET, {expiresIn: 300 });
+              const token = jwt.sign({email: email}, process.env.SECRET, {expiresIn: 300 });
               res.cookie('jwt_token', token, {
                 httpOnly: true,
                 maxAge: 300 * 1000,
@@ -83,7 +83,7 @@ function verifyJWT (req, res, next) {
   jwt.verify(token,process.env.SECRET, (err, decoded)=> {
     if(err) return res.status(401).end();
 
-    req.body.email = decoded.name;
+    req.email = decoded.email;
     next();
   })
 }
@@ -99,7 +99,7 @@ app.get('/validate', verifyJWT, (req, res) => {
   jwt.verify(token, process.env.SECRET, (err,decoded => {
     if(err) return res.status(401).json({message: 'Token inválido'});
 
-    req.body.email = decoded.name
+    req.email = decoded.name
     next();
   }))
 })

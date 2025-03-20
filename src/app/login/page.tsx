@@ -67,6 +67,7 @@ export default function Login() {
             if (responseBody.success) {
                 window.location.href = ('/login/dashboard');
             } else {
+                console.log(result.json)
                 setLoginValidate(false);
             }
         } catch (error) {
