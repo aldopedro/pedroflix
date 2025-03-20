@@ -56,8 +56,8 @@ app.post("/add_user", async (req, res) => {
 app.post("/login", cors(corsOptions), async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  con.query(`SELECT * FROM users WHERE email = ? AND password = ?`, [email],[password], (err, result) => {
-          if (result[0] === undefined || result1[0] === undefined) {
+  con.query(`SELECT * FROM users WHERE email = ? AND password = ?`, [email, password], (err, result) => {
+            if (result[0] === undefined) {
             return res.status(401).json ({
                 success:false,
                 message: 'Credenciais inválidas'
