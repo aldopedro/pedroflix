@@ -82,7 +82,7 @@ function verifyJWT (req, res, next) {
   jwt.verify(token,process.env.SECRET, (err, decoded)=> {
     if(err) return res.status(401).end();
 
-    req.email = decoded.email;
+    req.body.email = decoded.email;
     next();
   })
 }
@@ -98,7 +98,7 @@ app.get('/validate', verifyJWT, (req, res) => {
   jwt.verify(token, process.env.SECRET, (err,decoded => {
     if(err) return res.status(401).json({message: 'Token inválido'});
 
-    req.email = decoded.name
+    req.body.email = decoded.name
     next();
   }))
 })
