@@ -74,7 +74,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
                 sameSite: "strict"
               })
               
-              return res.json({auth:true, message:"Autenticado com sucesso!"})
+              return res.send(200).json({auth:true, sucess:true, message:"Autenticado com sucesso!"})
             }
           })
       })});

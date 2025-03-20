@@ -53,13 +53,12 @@ export default function Login() {
     async function login(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         try {
-            const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/validate`, {
+            const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                },
+                    },
                 body: JSON.stringify(users)
             });
 
