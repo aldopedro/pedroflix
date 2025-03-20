@@ -71,7 +71,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
               res.cookie('jwt_token', token, {
                 httpOnly: true,
                 maxAge: 300 * 1000,
-                sameSite: "strict"
+                sameSite: "None"
               })
               
               return res.send(200).json({auth:true, sucess:true, message:"Autenticado com sucesso!"})
@@ -84,7 +84,7 @@ function verifyJWT (req, res, next) {
   jwt.verify(token,process.env.SECRET, (err, decoded)=> {
     if(err) return res.status(401).end();
 
-    req.email = decoded.email;
+    req.body.email = decoded.body.email;
     next();
   })
 }
@@ -100,7 +100,7 @@ app.get('/validate', verifyJWT, (req, res) => {
   jwt.verify(token, process.env.SECRET, (err,decoded => {
     if(err) return res.status(401).json({message: 'Token inválido'});
 
-    req.email = decoded.email
+    req.body.email = decoded.body.email
     next();
   }))
 })
