@@ -66,16 +66,11 @@ export default function Login() {
                 console.error('Erro na requisição:', result.statusText);
                 setLoginValidate(false);
                 return;
-            }
-            const responseBody = await result.json();
-            if (responseBody.success) {
-                window.location.href = ('/login/dashboard');
-            } else {
-                console.log(result.json)
-                setLoginValidate(false);
+            }else {
+                    window.location.href = ('/login/dashboard');
             }
         } catch (error) {
-            console.log(error)
+            console.log("catch error")
             setLoginValidate(false);
         }
     }
