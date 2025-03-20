@@ -3,8 +3,9 @@ var mysql = require("mysql2");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
 const app = express();
+const jwt = require("jsonwebtoken");
+
 
 const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`;
 
@@ -12,7 +13,6 @@ const con = mysql.createConnection(urlDB)
 
 con.connect();
 app.use(express.json());
-app.use(cookieParser());
 const corsOptions = {
   origin: "*",
   credentials: true,
@@ -66,38 +66,44 @@ app.post("/login", cors(corsOptions), async (req, res) => {
                 success:false,
                 message: 'Credenciais inválidas'
               })
-          } else
-            res.cookie("teste", "teste", {
-              maxAge: 2000 * 60,
-              domain: ".vercel.app",
-              httpOnly: true,
-              secure: true,
-              sameSite: "None"
-            });
-          return res.status(200).json ({
-            success:true,
-            message: 'Login bem-sucedido',
+            } else {
+              const token = jwt.sign({name: email}, process.env.SECRET, {expiresIn: 300 });
+              res.cookie('jwt_token', token, {
+                httpOnly: true,
+                maxAge: 300 * 1000,
+                sameSite: "strict"
+              })
+              
+              return res.json({auth:true, message:"Autenticado com sucesso!"})
+            }
           })
-        }
-      );
-    });
-});
+      })});
 
-function autorizeCookie(req, res, next) {
-  const authorizedCookie = req.cookies["teste"];
-  if (authorizedCookie === "teste") {
-    return next();
-  } else {
-    console.log("Cookie não autorizado:", req.cookies);
-    return res.status(403).send("Forbidden: Unauthorized cookie");
-  }
+function verifyJWT (req, res, next) {
+  const token = req.headers['x-acess-token']
+  jwt.verify(token,process.env.SECRET, (err, decoded)=> {
+    if(err) return res.status(401).end();
+
+    req.email = decoded.email;
+    next();
+  })
 }
 
-app.get("/validate", autorizeCookie, (req, res) => {
-  var cookie = req.headers.cookie;
-  console.log("Cookies recebidos:", cookie);
-  return res.json({ cookies: cookie });
-});
+
+
+app.get('/validate', verifyJWT, (req, res) => {
+  const token = req.cookies['jwt_token']
+
+  if(!token) {
+    return res.status(401).json({message: 'Ausência de Token'});
+  }
+  jwt.verify(token, process.env.SECRET, (err,decoded => {
+    if(err) return res.status(401).json({message: 'Token inválido'});
+
+    req.email = decoded.email
+    next();
+  }))
+})
 
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
