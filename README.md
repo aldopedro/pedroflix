@@ -9,10 +9,13 @@ Para rodar o projeto em ambiente local, será necessário:
 Rodar o comando "npm i" - instala as dependências necessárias do projeto.
 Utilize "npm run dev" para iniciar o projeto localmente.
 Para configurar seu banco de dados crie o arquivo .env e utilize as variáveis de ambiente:
-DB_HOST=*Nome do host
-DB_PASSWORD=*Senha
-DB_USER=*Nome do usuário
-DB_NAME=*Nome da database
+MYSQLHOST=*Nome do host.
+MYSQLPASSWORD=*Senha do banco
+MYSQLUSER=*Usuário
+MYSQLDATABASE=*Nome da database
+MYSQLPORT=*Porta do Banco de dados
+NEXT_PUBLIC_BACKEND_URL=*URL do banco de dados
+SECRET=*segredo para maior segurança dos tokens
 
 # TECNOLOGIAS
 - [x] Next.js
@@ -20,9 +23,10 @@ DB_NAME=*Nome da database
 - [x] Typescript
 - [x] MySQL
 - [X] Utilizar armazenamento na nuvem
+- [x] JWT+COOKIES - para validação de login
 
 Futuras tecnologias:
-- [] JWT - para validação de login
+
 - [] Bcrypt Hash - para encriptação de senha
 - [] Implantação de cards e player
 - [] Testes Unitários
