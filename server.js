@@ -67,8 +67,8 @@ app.post("/login", cors(corsOptions), async (req, res) => {
               res.cookie('token', token, {
                 httpOnly: true,
                 maxAge: 300 * 1000,
-                sameSite: "Lax",
-                secure: false,
+                sameSite: "None",
+                secure: true,
                 path: '/',
                 partitioned: true
               })
