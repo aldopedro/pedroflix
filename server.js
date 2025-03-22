@@ -5,7 +5,7 @@ dotenv.config();
 const cors = require("cors");
 const app = express();
 const jwt = require("jsonwebtoken");
-
+const cookieParser = require('cookie-parser');
 
 const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`;
 
@@ -20,7 +20,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.use(cookieParser())
 app.get("/", (req, res) => {
   con.query("SELECT * FROM users", (err, result) => {
     res.send(result);
@@ -64,11 +64,11 @@ app.post("/login", cors(corsOptions), async (req, res) => {
               })
             } else {
               const token = jwt.sign({email: email}, process.env.SECRET, {expiresIn: 300 });
-              res.cookie('jwt_token', token, {
+              res.cookie('token', token, {
                 httpOnly: true,
                 maxAge: 300 * 1000,
-                sameSite: "None",
-                secure: true,
+                sameSite: "Lax",
+                secure: false,
                 path: '/',
                 partitioned: true
               })
@@ -78,7 +78,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
       });
 
 function verifyJWT (req, res, next) {
-  const token = req.headers['x-access-token']
+  const token = req.cookies.token
   jwt.verify(token,process.env.SECRET, (err, decoded)=> {
     if(err) return res.status(401).end();
 
@@ -90,18 +90,22 @@ function verifyJWT (req, res, next) {
 
 
 app.get('/validate', verifyJWT, (req, res) => {
-  const token = req.cookies['jwt_token']
+  console.log("Chegou no endpoint /validate");
 
-  if(!token) {
-    return res.status(401).json({message: 'Ausência de Token'});
+  const token = req.cookies.token; 
+  if (!token) {
+    return res.status(401).json({ message: 'Ausência de Token' });
   }
-  jwt.verify(token, process.env.SECRET, (err,decoded => {
-    if(err) return res.status(401).json({message: 'Token inválido'});
 
-    req.body.email = decoded.email
-    next();
-  }))
-})
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Token inválido' });
+    }
+
+    req.body.email = decoded.email;
+    res.status(200).json({ message: 'Token válido', email: req.body.email });
+  });
+});
 
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
