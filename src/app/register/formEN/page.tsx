@@ -19,7 +19,8 @@ function FormEN () {
             headers: { "Content-Type": "application/json", "Acess-Control-Allow-Origin": "*", },
             body: JSON.stringify(user)
           }).then()
-          setEmailExist(await result.json())
+          const responseData = await result.json()
+          setEmailExist(responseData.emailExist)
         }
       }
     
