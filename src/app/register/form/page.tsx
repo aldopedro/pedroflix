@@ -20,11 +20,11 @@ function RegisterForm() {
           credentials: 'include',
           body: JSON.stringify(user)
         });
-        const responseData = await result.json();
-        if (result.status === 201)
-          window.location.href = (responseData.redirectUrl);
-        else (result.status === 500)
-            setEmailExist(responseData.emailExist);
+        const responseData = await result.json()
+        if (result.status === 201) {
+          window.location.href = (responseData.redirectUrl)
+        }
+        else {setEmailExist(responseData.emailExist)}
     }
   }
 
@@ -118,7 +118,16 @@ function RegisterForm() {
               <label className={activeLabelPassword === true ? style.passwordLabelTrue : style.passwordLabelFalse} htmlFor="">Adicione uma senha</label>
               <input onClick={() => setActiveLabelPassword(true)}
                 onChange={(e) => validatePass(e.target.value) && e.target.value === "" ? setActiveLabelPassword(false) : setActiveLabelPassword(true)}
-                onBlur={(e) => validatePass(e.target.value) === false && e.target.value === "" ? setActiveLabelPassword(false) : validatePass(e.target.value) === true && e.target.value != "" ? setActiveLabelPassword(true) : setCorrectBorder(true)}
+                onBlur={(e) => {
+                  const value = e.target.value;
+                  if (validatePass(value) === false && value === "") {
+                    setActiveLabelPassword(false);
+                  } else if (validatePass(value) === true && value !== "") {
+                    setActiveLabelPassword(true);
+                  } else {
+                    setCorrectBorder(true);
+                  }
+                }}
                 className={`${(validateUppercase === false || validateNumber === false) && password != "" && correctBorder === true ? style.borderPasswordFalse : validateUppercase === true && validateNumber === true ? style.borderPasswordTrue : style.form_input}`}
                 type="password" name="password" value={password} />
               <p className={validateUppercase === false && password != "" && correctBorder === true ? style.passwordIncorrect : style.passwordCorrect}>Informe uma senha com pelo menos uma letra maiúscula e uma minúscula</p>
