@@ -4,7 +4,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const fetch = require("node-fetch");
+const fetch = (...args) => import('node-fetch').then(mod => mod.default(...args));
+
 
 dotenv.config();
 const app = express();
