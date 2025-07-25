@@ -16,18 +16,18 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
+const corsOptions = {
+  origin:
+  process.env.NODE_ENV === "production"
+  ? "https://pedroflix-five.vercel.app"
+  : "http://localhost:3000",
+  credentials: true,
+};
+app.options("*", cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
-
-const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? "https://pedroflix-five.vercel.app"
-      : "http://localhost:3000",
-  credentials: true,
-};
-app.use(cors(corsOptions));
 
 // Rota GET usuários
 app.get("/", async (req, res) => {
