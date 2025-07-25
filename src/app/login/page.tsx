@@ -51,7 +51,7 @@ export default function Login() {
         e.preventDefault()
         const API_URL =
         process.env.NODE_ENV === "production"
-            ? "https://pedroflix.onrender.com"
+            ? "https://pedroflix-api.onrender.com"
             : "http://localhost:8080";
         setTimeout(async () => {
             try {
