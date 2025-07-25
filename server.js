@@ -18,7 +18,7 @@ const con = mysql.createConnection({
 con.connect();
 app.use(express.json());
 const corsOptions = {
-  origin: process.env.NODE_ENV === "production" ? "https://pedroflix-five.vercel.app/" : "http://localhost:3000",
+  origin: process.env.NODE_ENV === "production" ? "https://pedroflix-five.vercel.app" : "http://localhost:3000",
   credentials: true,
 };
 
