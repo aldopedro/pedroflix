@@ -23,7 +23,7 @@ app.use(cookieParser());
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://pedroflix.onrender.com"
+      ? "https://pedroflix-five.vercel.app"
       : "http://localhost:3000",
   credentials: true,
 };
