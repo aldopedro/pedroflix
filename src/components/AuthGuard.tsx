@@ -14,7 +14,7 @@ export default function AuthGuard({ children }: Props) {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch(`https://pedroflix-api.onrender.com/validate`, {
+        const response = await fetch(`https://pedroflix.onrender.com/validate`, {
           method: 'GET',
           credentials: 'include',
         });
