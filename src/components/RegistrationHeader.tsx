@@ -9,7 +9,7 @@ function RegistrationHeader (language:Prop) {
     if(language.language ==="pt") {
         return (
             <header className={styles.header}>
-            <h1  className={styles.headerTitle}><a href="/">PEDROFLIX</a></h1>
+            <h1  className={styles.headerTitle}><link href="/">PEDROFLIX</link></h1>
             <button className={styles.headerButton}>Entrar</button>
         </header>
         )
