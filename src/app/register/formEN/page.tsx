@@ -9,7 +9,7 @@ import Link from "next/link"
 function FormEN () {
   const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://pedroflix-five.vercel.app/register/form"
+    ? "https://pedroflix-api.onrender.com"
     : "http://localhost:8080";
     async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()

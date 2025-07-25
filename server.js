@@ -22,7 +22,7 @@ app.use(cookieParser());
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://pedroflix-five.vercel.app"
+      ? "https://pedroflix-api.onrender.com"
       : "http://localhost:3000",
   credentials: true,
 };
@@ -56,7 +56,7 @@ app.post("/add_user", cors(corsOptions), async (req, res) => {
 
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
 
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch(`${process.env.NODE_ENV}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

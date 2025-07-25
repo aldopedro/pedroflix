@@ -3,7 +3,7 @@ import AuthGuard from "@/components/AuthGuard";
 async function logout() {
   const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://pedroflix-five.vercel.app"
+    ? "https://pedroflix-api.onrender.com"
     : "http://localhost:8080";
   try {
     const response = await fetch(`${API_URL}/logout`, {

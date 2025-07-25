@@ -10,7 +10,7 @@ type Props = {
 export default function AuthGuard({ children }: Props) {
   const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://pedroflix-five.vercel.app"
+    ? "https://pedroflix-api.onrender.com"
     : "http://localhost:8080";
   const router = useRouter();
   const [authorized, setAuthorized] = useState<boolean | null>(null);
