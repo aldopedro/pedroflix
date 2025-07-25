@@ -49,33 +49,17 @@ app.post("/add_user", cors(corsOptions), async (req, res) => {
 
   try {
     const existing = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-
     if (existing.rows.length > 0) {
       return res.json({ emailExist: true });
     }
-
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
-
-    const response = await fetch(`https://pedroflix-api.onrender.com/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      return res.status(500).json({ message: "Falha ao gerar token de login." });
-    }
-
-    const data = await response.json();
-
-    res.cookie("token", data.token, {
+    res.cookie("token", token, {
       maxAge: 300 * 1000,
       path: "/",
     });
-
     return res.status(201).json({
       message: "Usuário criado com sucesso!",
-      token: data.token,
+      token: token,
       redirectUrl: "/login/dashboard",
     });
   } catch (err) {
