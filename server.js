@@ -53,6 +53,7 @@ app.post("/add_user", cors(corsOptions), async (req, res) => {
       return res.json({ emailExist: true });
     }
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
+    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
     res.cookie("token", token, {
       maxAge: 300 * 1000,
       path: "/",
