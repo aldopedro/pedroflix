@@ -11,9 +11,7 @@ import { useState } from "react"
 
 export default function Login() {
     const [emailTextToggle, setEmailTextToggle] = useState<boolean>(false)
-    const [emailValue, setEmailValue] = useState<string>()
     const [passwordTextToggle, setPasswordTextToggle] = useState<boolean>(false)
-    const [passwordValue, setPasswordValue] = useState<string>()
     const [loginValidate, setLoginValidate] = useState<boolean>(true)
 
     const [users, setUser] = useState({
@@ -21,13 +19,12 @@ export default function Login() {
         password: ''
     })
     function validateEmail(email: string) {
-        setEmailValue(email);
-        setUser({ ...users, email: `${emailValue}` });
+        setUser(prev => ({ ...prev, email }));
         return true;
     }
-    function validatePassword(pass: string) {
-        setPasswordValue(pass);
-        setUser({ ...users, password: `${passwordValue}` });
+
+    function validatePassword(password: string) {
+        setUser(prev => ({ ...prev, password }));
         return true;
     }
     function blurEmail(value: string) {
@@ -52,27 +49,28 @@ export default function Login() {
     }
     async function login(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
-        try {
-            const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*"
-                    },
-                body: JSON.stringify(users)
-            });
-            if (!result.ok) {
-                console.error('Erro na requisição:', result.statusText);
+        setTimeout(async () => {
+            try {
+                const result = await fetch(`http://localhost:8080/login`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        "Content-Type": "application/json",
+                        },
+                    body: JSON.stringify(users)
+                });
+                if (!result.ok) {
+                    console.error('Erro na requisição:', result.statusText);
+                    setLoginValidate(false);
+                    return;
+                }else {
+                        window.location.href = ('/login/dashboard');
+                }
+            } catch (err) {
+                console.log("catch error" + err)
                 setLoginValidate(false);
-                return;
-            }else {
-                    window.location.href = ('/login/dashboard');
             }
-        } catch (err) {
-            console.log("catch error" + err)
-            setLoginValidate(false);
-        }
+            },3000)
     }
 
 
@@ -113,7 +111,7 @@ export default function Login() {
                             onClick={() => onClickPassword()}
                             type="password"
                             name="password"
-                            id="password" />
+                            id="password"/>
                     </div>
                     <button className={styles.formButton} type="submit" onClick={login}>Entrar</button>
                     <Link className={styles.rememberPassword} href="/loginHelp">Esqueceu a senha?</Link>
