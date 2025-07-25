@@ -13,17 +13,14 @@ Deploy disponível em: [Pedroflix](https://pedroflix-five.vercel.app/)
 - MYSQLPASSWORD=*Senha do banco
 - MYSQLUSER=*Usuário
 - MYSQLDATABASE=*Nome da database
-- MYSQLPORT=*Porta do Banco de dados
-- NEXT_PUBLIC_BACKEND_URL=*URL do banco de dados
-- SECRET=*segredo para maior segurança dos tokens
+- SECRET=*segurança
 
 ## TECNOLOGIAS
 - [x] Next.js
 - [x] Express
 - [x] Typescript
 - [x] MySQL
-- [X] Utilizar armazenamento na nuvem
-- [x] JWT+COOKIES - para validação de login
+- [x] JWT+COOKIES
 
 Futuras tecnologias:
 
