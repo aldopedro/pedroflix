@@ -7,10 +7,14 @@ import Link from "next/link"
 
 
 function FormEN () {
+  const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://pedroflix-five.vercel.app"
+    : "http://localhost:8080";
     async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if (emailCorrect === 2 && correctBorder === true) {
-          const result = await fetch(`http://localhost:8080/add_user`, {
+          const result = await fetch(`${API_URL}/add_user`, {
             method: 'POST',
             headers: { "Content-Type": "application/json", "Acess-Control-Allow-Origin": "*", },
             body: JSON.stringify(user)

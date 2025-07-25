@@ -49,9 +49,13 @@ export default function Login() {
     }
     async function login(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
+        const API_URL =
+        process.env.NODE_ENV === "production"
+            ? "https://pedroflix-five.vercel.app"
+            : "http://localhost:8080";
         setTimeout(async () => {
             try {
-                const result = await fetch(`http://localhost:8080/login`, {
+                const result = await fetch(`${API_URL}/login`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {

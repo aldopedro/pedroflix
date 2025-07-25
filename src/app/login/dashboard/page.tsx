@@ -1,11 +1,15 @@
 'use client'
 import AuthGuard from "@/components/AuthGuard";
 async function logout() {
+  const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://pedroflix-five.vercel.app"
+    : "http://localhost:8080";
   try {
-    const response = await fetch('http://localhost:8080/logout', {
+    const response = await fetch(`${API_URL}/logout`, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // se estiver usando cookies para autenticação
+      credentials: 'include',
     });
 
     if (response.ok) {
