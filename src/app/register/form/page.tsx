@@ -10,7 +10,7 @@ function RegisterForm() {
 
   const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://https://pedroflix-api.onrender.com"
+    ? "https://pedroflix-api.onrender.com"
     : "http://localhost:8080";
 
   async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
