@@ -1,5 +1,5 @@
 'use client'
-import AuthGuard from "@/components/AuthGuard";
+import AuthGuard from "../../../components/AuthGuard";
 async function logout() {
   const API_URL =
   process.env.NODE_ENV === "production"
