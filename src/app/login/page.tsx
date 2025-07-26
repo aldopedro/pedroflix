@@ -5,11 +5,13 @@ import overlayBr from "../../assets/background-BR.jpg"
 import Footer from "../../components/RegistrationFooter"
 import Link from "next/link"
 import { useState } from "react"
-
+import { useLoading } from "../../components/ContextLoading";
+import LoadingOverlay from "../../components/LoadingOverlay";
 
 
 
 export default function Login() {
+    const { loading, setLoading } = useLoading()
     const [emailTextToggle, setEmailTextToggle] = useState<boolean>(false)
     const [passwordTextToggle, setPasswordTextToggle] = useState<boolean>(false)
     const [loginValidate, setLoginValidate] = useState<boolean>(true)
@@ -49,12 +51,12 @@ export default function Login() {
     }
     async function login(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
+        setLoading(true)
         const API_URL =
         process.env.NODE_ENV === "production"
             ? "https://pedroflix-api.onrender.com"
             : "http://localhost:8080";
-        setTimeout(async () => {
-            try {
+        try {
                 const result = await fetch(`${API_URL}/login`, {
                     method: 'POST',
                     credentials: 'include',
@@ -73,13 +75,15 @@ export default function Login() {
             } catch (err) {
                 console.log("catch error" + err)
                 setLoginValidate(false);
+            } finally {
+                setLoading(false)
             }
-            },3000)
     }
 
 
     return (
         <div>
+            <LoadingOverlay loading={loading} />
             <div className={styles.overlay}>
                 <div className={styles.overlayShadow}></div>
                 <Image className={styles.overlayImage}
