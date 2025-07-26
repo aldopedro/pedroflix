@@ -56,9 +56,12 @@ app.post("/add_user", cors(corsOptions), async (req, res) => {
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
     const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
     res.cookie("token", token, {
-      maxAge: 300 * 1000,
-      path: "/",
-    });
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+  path: "/",
+  maxAge: 300 * 1000,
+});
     return res.status(201).json({
       message: "Usuário criado com sucesso!",
       token: token,
@@ -90,9 +93,12 @@ app.post("/login", cors(corsOptions), async (req, res) => {
     const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
 
     res.cookie("token", token, {
-      maxAge: 300 * 1000,
-      path: "/",
-    });
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+  path: "/",
+  maxAge: 300 * 1000,
+});
 
     return res.status(200).json({
       token,
