@@ -1,39 +1,48 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export default function AuthGuard({ children }: Props) {
+export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const [authorized, setAuthorized] = useState<boolean | null>(null);
+  const [valid, setValid] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const validateToken = async () => {
-      try {
-        const response = await fetch(`https://pedroflix-api.onrender.com/validate`, {
-          method: 'GET',
-          credentials: 'include',
-        });
+    const token = localStorage.getItem("token");
 
-        if (response.ok) {
-          setAuthorized(true);
+    if (!token) {
+      setValid(false);
+      return;
+    }
+
+    fetch("https://pedroflix-api.onrender.com/validate", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          setValid(true);
         } else {
-          router.push('/login');
+          localStorage.removeItem("token");
+          setValid(false);
         }
-      } catch (err) {
-        console.error("Erro na validação", err);
-        router.push('/login');
-      }
-    };
+      })
+      .catch(() => {
+        setValid(false);
+      });
+  }, []);
 
-    validateToken();
-  }, [router]);
+  useEffect(() => {
+    if (valid === false) {
+      router.push("/login");
+    }
+  }, [valid]);
 
-  if (authorized === null) return <p>Carregando...</p>;
+  if (valid === null) {
+    return <p>Verificando autenticação...</p>;
+  }
 
   return <>{children}</>;
 }

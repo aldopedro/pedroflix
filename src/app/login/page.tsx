@@ -70,7 +70,9 @@ export default function Login() {
                     setLoginValidate(false);
                     return;
                 }else {
-                        window.location.href = ('/login/dashboard');
+                    const data = await result.json();
+                    localStorage.setItem("token", data.token);
+                    window.location.href = ('/login/dashboard');
                 }
             } catch (err) {
                 console.log("catch error" + err)

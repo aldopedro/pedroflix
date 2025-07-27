@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const fetch = (...args) => import('node-fetch').then(mod => mod.default(...args));
 
-
 dotenv.config();
 const app = express();
 
@@ -16,16 +15,16 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
+
 const corsOptions = {
-  origin:
-  process.env.NODE_ENV === "production"
-  ? "https://pedroflix-five.vercel.app"
-  : "http://localhost:3000",
+  origin: process.env.NODE_ENV === "production"
+    ? "https://pedroflix-five.vercel.app"
+    : "http://localhost:3000",
   credentials: true,
 };
+
 app.options("*", cors(corsOptions));
 app.use(cors(corsOptions));
-
 app.use(express.json());
 app.use(cookieParser());
 
@@ -53,18 +52,14 @@ app.post("/add_user", cors(corsOptions), async (req, res) => {
     if (existing.rows.length > 0) {
       return res.json({ emailExist: true });
     }
+
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
-    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
-    res.cookie("token", token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-  path: "/",
-  maxAge: 300 * 1000,
-});
+
+    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 }); // 5 minutos
+
     return res.status(201).json({
       message: "Usuário criado com sucesso!",
-      token: token,
+      token, // 🔁 frontend salva no localStorage
       redirectUrl: "/login/dashboard",
     });
   } catch (err) {
@@ -90,15 +85,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
-
-    res.cookie("token", token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-  path: "/",
-  maxAge: 300 * 1000,
-});
+    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 }); // 5 minutos
 
     return res.status(200).json({
       token,
@@ -111,28 +98,34 @@ app.post("/login", cors(corsOptions), async (req, res) => {
   }
 });
 
-// Middleware JWT
+
 function verifyJWT(req, res, next) {
-  const token = req.cookies.token;
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) return res.status(401).json({ message: "Token ausente" });
+
+  const token = authHeader.split(" ")[1];
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) return res.status(401).end();
-    req.body.email = decoded.email;
+    if (err) return res.status(403).json({ message: "Token inválido" });
+
+    req.user = decoded;
     next();
   });
 }
 
-// Rota refresh
 app.post("/refresh", (req, res) => {
-  const token = req.cookies.refreshToken;
-  if (!token) return res.status(401).json({ message: "Sem token de refresh" });
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ message: "Token ausente" });
 
-  jwt.verify(token, process.env.REFRESH_SECRET, (err, payload) => {
-    if (err) return res.status(403).json({ message: "Refresh token inválido ou expirado" });
+  const token = authHeader.split(" ")[1];
+
+  jwt.verify(token, process.env.SECRET, (err, payload) => {
+    if (err) return res.status(403).json({ message: "Token expirado ou inválido" });
 
     const newAccessToken = jwt.sign(
       { email: payload.email },
-      process.env.ACCESS_SECRET,
-      { expiresIn: "15m" }
+      process.env.SECRET,
+      { expiresIn: 300 }
     );
 
     res.json({ accessToken: newAccessToken });
@@ -141,23 +134,12 @@ app.post("/refresh", (req, res) => {
 
 // Validação do token
 app.get("/validate", verifyJWT, (req, res) => {
-  const token = req.cookies.token;
-  if (!token) return res.status(401).json({ message: "Ausência de Token" });
-
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) return res.status(401).json({ message: "Token inválido" });
-    res.status(200).json({ message: "Token válido", email: decoded.email });
-  });
+  res.status(200).json({ message: "Token válido", email: req.user.email });
 });
 
-// Logout
+// Logout (limpa token do lado do cliente)
 app.post("/logout", cors(corsOptions), (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-    maxAge: 1000 * 60 * 60,
-  });
+  // Não há cookie para limpar. O frontend deve limpar o localStorage.
   res.status(200).json({ message: "Logout realizado com sucesso!" });
 });
 
