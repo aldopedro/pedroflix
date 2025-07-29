@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import pool from "../db/pool";
 
-export async function register(req: Request, res: Response) {
+import jwt from "jsonwebtoken";
+import pool from "../db/pool.js";
+
+export async function register(req, res) {
   const { email, password } = req.body;
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -18,18 +18,18 @@ export async function register(req: Request, res: Response) {
 
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
 
-    const token = jwt.sign({ email }, process.env.SECRET as string, { expiresIn: 300 });
+    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
     return res.status(201).json({ message: "Usuário criado com sucesso!", token, redirectUrl: "/login/dashboard" });
   } catch (err) {
-    res.status(500).json({ error: "Erro interno", detail: (err as Error).message });
+    res.status(500).json({ error: "Erro interno", detail: (err).message });
   }
 }
 
-export async function listUsers(req: Request, res: Response) {
+export async function listUsers(req, res) {
   try {
     const result = await pool.query("SELECT * FROM users");
     res.send(result.rows);
   } catch (err) {
-    res.status(500).json({ error: "Erro ao buscar usuários", detail: (err as Error).message });
+    res.status(500).json({ error: "Erro ao buscar usuários", detail: (err).message });
   }
 }

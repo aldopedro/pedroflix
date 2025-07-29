@@ -1,6 +1,6 @@
-import { CorsOptions } from "cors";
 
-const corsOptions: CorsOptions = {
+
+const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
       ? "https://pedroflix-five.vercel.app"
