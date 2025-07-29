@@ -9,17 +9,12 @@ Deploy disponível em: [Pedroflix](https://pedroflix-five.vercel.app/)
 - Rodar o comando "npm i" - instala as dependências necessárias do projeto.
 - Utilize "npm run dev" para iniciar o projeto localmente.
 - Para configurar seu banco de dados crie o arquivo .env e utilize as variáveis de ambiente:
-- MYSQLHOST=*Nome do host.
-- MYSQLPASSWORD=*Senha do banco
-- MYSQLUSER=*Usuário
-- MYSQLDATABASE=*Nome da database
-- SECRET=*segurança
-
+DATABASE_URL = *url do seu banco
 ## TECNOLOGIAS
 - [x] Next.js
 - [x] Express
 - [x] Typescript
-- [x] MySQL
+- [x] Postgre
 - [x] JWT+COOKIES
 
 Futuras tecnologias:

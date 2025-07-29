@@ -11,14 +11,14 @@ export async function register(req, res) {
   }
 
   try {
-    const existing = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    const existing = await pool.query("SELECT email FROM users WHERE email = $1", [email]);
     if (existing.rows.length > 0) {
       return res.json({ emailExist: true });
     }
 
-    await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
-
-    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
+    const insertResult = await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
+    const userId = result.rows[0].id
+    const token = jwt.sign({id:userId }, process.env.SECRET, { expiresIn: 300 });
     return res.status(201).json({ message: "Usuário criado com sucesso!", token, redirectUrl: "/login/dashboard" });
   } catch (err) {
     res.status(500).json({ error: "Erro interno", detail: (err).message });

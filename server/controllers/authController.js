@@ -11,8 +11,8 @@ export async function login(req, res) {
     if (result.rows.length === 0) {
       return res.status(401).json({ success: false, message: "Credenciais inválidas" });
     }
-
-    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: 300 });
+      const user = result.rows[0]
+    const token = jwt.sign({ id:user.id }, process.env.SECRET, { expiresIn: 300 });
     res.status(200).json({ token, auth: true, success: true, message: "Autenticado com sucesso!" });
   } catch (err) {
     res.status(500).json({ error: "Erro ao autenticar", detail: (err).message });
@@ -27,11 +27,11 @@ export function refresh(req, res) {
   jwt.verify(token, process.env.SECRET, (err, payload) => {
     if (err) return res.status(403).json({ message: "Token expirado ou inválido" });
 
-    const newAccessToken = jwt.sign({ email: payload.email }, process.env.SECRET, { expiresIn: 300 });
+    const newAccessToken = jwt.sign({ id: payload.id }, process.env.SECRET, { expiresIn: 300 });
     res.json({ accessToken: newAccessToken });
   });
 }
 
 export function validate(req, res) {
-  res.status(200).json({ message: "Token válido", email: (req.user).email });
+  res.status(200).json({ message: "Token válido", id: (req.user).id });
 }
