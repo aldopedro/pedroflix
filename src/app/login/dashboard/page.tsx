@@ -50,7 +50,7 @@ export default function ProfilesScreen() {
         {profiles.map((profile) => (
           <div key={profile.id} className="profileBox">
             <div>
-              <Image src={profile.avatar} alt={profile.name} width={100} height={100}/>
+              <Image src={profile.avatar} alt={profile.name} width={100} height={100} />
               <span>{profile.name}</span>
             </div>
           </div>
@@ -78,8 +78,14 @@ export default function ProfilesScreen() {
                 value={newProfile.name}
                 className="modalInputName"
                 onChange={(e) => setNewProfile({ ...newProfile, name: e.target.value })}
-                onClick={(e) => setModalPlaceholder(false)}
-                onBlur={(e) => { e.target.value != "" ? setModalPlaceholder(false) : setModalPlaceholder(true) }}
+                onClick={() => setModalPlaceholder(false)}
+                onBlur={(e) => {
+                  if (e.target.value !== "") {
+                    setModalPlaceholder(false);
+                  } else {
+                    setModalPlaceholder(true);
+                  }
+                }}
               />
               <span className={modalPlaceholder ? "modalPlaceholder" : "modalPlaceholderFalse"}>Nome</span>
               <label>Escolha um avatar:</label>
