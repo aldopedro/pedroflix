@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import "./dashboard.css"
 import AuthGuard from "@/components/AuthGuard";
+import Image from "next/image";
 
 type Profile = {
   id: number;
@@ -49,7 +50,7 @@ export default function ProfilesScreen() {
         {profiles.map((profile) => (
           <div key={profile.id} className="profileBox">
             <div>
-              <img src={profile.avatar} alt={profile.name} />
+              <Image src={profile.avatar} alt={profile.name} width={100} height={100}/>
               <span>{profile.name}</span>
             </div>
           </div>
@@ -86,7 +87,8 @@ export default function ProfilesScreen() {
                 {[1, 2, 3, 4].map((n) => {
                   const url = `/avatars/avatar${n}.png`;
                   return (
-                    <img
+                    <Image
+                      alt="avatar"
                       key={n}
                       src={url}
                       className={newProfile.avatar === url ? "selected" : ""}
