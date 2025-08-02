@@ -23,7 +23,7 @@ export default function ProfilesScreen() {
 
   useEffect(() => {
     // Buscar perfis existentes
-    fetch(`${process.env.API_URL}/profiles`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/profiles`, {
       headers: {
         method: "GET",
         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -50,7 +50,7 @@ export default function ProfilesScreen() {
         {profiles.map((profile) => (
           <div key={profile.id} className="profileBox">
             <div>
-              <Image src={profile.avatar} alt={profile.name} width={100} height={100} />
+              <Image src={profile.avatar} alt={profile.name} />
               <span>{profile.name}</span>
             </div>
           </div>
@@ -78,14 +78,8 @@ export default function ProfilesScreen() {
                 value={newProfile.name}
                 className="modalInputName"
                 onChange={(e) => setNewProfile({ ...newProfile, name: e.target.value })}
-                onClick={() => setModalPlaceholder(false)}
-                onBlur={(e) => {
-                  if (e.target.value !== "") {
-                    setModalPlaceholder(false);
-                  } else {
-                    setModalPlaceholder(true);
-                  }
-                }}
+                onClick={(e) => setModalPlaceholder(false)}
+                onBlur={(e) => { e.target.value != "" ? setModalPlaceholder(false) : setModalPlaceholder(true) }}
               />
               <span className={modalPlaceholder ? "modalPlaceholder" : "modalPlaceholderFalse"}>Nome</span>
               <label>Escolha um avatar:</label>
@@ -94,7 +88,7 @@ export default function ProfilesScreen() {
                   const url = `/avatars/avatar${n}.png`;
                   return (
                     <Image
-                      alt="avatar"
+                    alt="avatar"
                       key={n}
                       src={url}
                       className={newProfile.avatar === url ? "selected" : ""}

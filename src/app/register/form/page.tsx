@@ -11,7 +11,7 @@ function RegisterForm() {
   async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     if (emailCorrect === 2 && correctBorder === true) {
-        const result = await fetch(`${process.env.API_URL}/add_user`, {
+        const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/add_user`, {
           method: 'POST',
           headers: { 
             "Content-Type": "application/json", 

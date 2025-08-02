@@ -53,7 +53,7 @@ export default function Login() {
         e.preventDefault()
         setLoading(true)
         try {
-                const result = await fetch(`${process.env.API_URL}/login`, {
+                const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
