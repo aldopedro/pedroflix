@@ -32,6 +32,29 @@ export function refresh(req, res) {
   });
 }
 
+export async function getProfiles(req, res) {
+  const userId = req.user.id
+
+  try {
+    const result = pool.query("SELECT * FROM profiles WHERE user_id = $1", [userId]);
+    res.status(201).json(result.rows)
+  } catch (err) {
+    res.status(501).json({ message: "Erro ao buscar perfis", detail: err.message });
+  }
+}
+
+export async function createProfile (req, res) {
+  const userId = req.user.id
+  const {name, avatar, isKids} = req.body
+
+  try {
+    const result = pool.query("INSERT INTO profiles (user_id, name, avatar, is_kids) VALUES ($1 $2 $3 $4) RETURNING *", [userId, name, avatar, isKids]);
+    res.status(201).json(result.rows[0])
+  } catch (err) {
+      res.status(500).json({ message: "Erro ao criar perfil", detail: err.message });
+  }
+}
+
 export function validate(req, res) {
   res.status(200).json({ message: "Token válido", id: (req.user).id });
 }

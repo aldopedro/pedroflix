@@ -52,12 +52,8 @@ export default function Login() {
     async function login(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         setLoading(true)
-        const API_URL =
-        process.env.NODE_ENV === "production"
-            ? "https://pedroflix-api.onrender.com"
-            : "http://localhost:8080";
         try {
-                const result = await fetch(`${API_URL}/login`, {
+                const result = await fetch(`${process.env.API_URL}/login`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {

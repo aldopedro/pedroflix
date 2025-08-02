@@ -32,4 +32,6 @@ export async function listUsers(req, res) {
   } catch (err) {
     res.status(500).json({ error: "Erro ao buscar usuários", detail: (err).message });
   }
+  
+
 }

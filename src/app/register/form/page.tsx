@@ -8,15 +8,10 @@ import Link from "next/link"
 
 function RegisterForm() {
 
-  const API_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://pedroflix-api.onrender.com"
-    : "http://localhost:8080";
-
   async function validateAll(e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     if (emailCorrect === 2 && correctBorder === true) {
-        const result = await fetch(`${API_URL}/add_user`, {
+        const result = await fetch(`${process.env.API_URL}/add_user`, {
           method: 'POST',
           headers: { 
             "Content-Type": "application/json", 
