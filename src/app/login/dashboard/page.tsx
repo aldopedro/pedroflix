@@ -78,8 +78,10 @@ export default function ProfilesScreen() {
                 value={newProfile.name}
                 className="modalInputName"
                 onChange={(e) => setNewProfile({ ...newProfile, name: e.target.value })}
-                onClick={(e) => setModalPlaceholder(false)}
-                onBlur={(e) => { e.target.value != "" ? setModalPlaceholder(false) : setModalPlaceholder(true) }}
+                onClick={() => setModalPlaceholder(false)}
+                onBlur={(e) => {if (e.target.value != "") {
+                  setModalPlaceholder(false)
+                } else {setModalPlaceholder(true)}}}
               />
               <span className={modalPlaceholder ? "modalPlaceholder" : "modalPlaceholderFalse"}>Nome</span>
               <label>Escolha um avatar:</label>
