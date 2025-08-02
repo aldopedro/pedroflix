@@ -32,7 +32,7 @@ export function refresh(req, res) {
   });
 }
 
-export async function getProfiles(req, res) {
+export function getProfiles(req, res) {
   const userId = req.user.id
 
   try {
@@ -43,7 +43,7 @@ export async function getProfiles(req, res) {
   }
 }
 
-export async function createProfile (req, res) {
+export function createProfiles (req, res) {
   const userId = req.user.id
   const {name, avatar, isKids} = req.body
 

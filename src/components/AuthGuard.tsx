@@ -38,7 +38,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     if (valid === false) {
       router.push("/login");
     }
-  }, [valid]);
+  }, [valid, router]);
 
   if (valid === null) {
     return <p>Verificando autenticação...</p>;
