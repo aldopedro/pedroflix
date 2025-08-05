@@ -43,12 +43,12 @@ export function getProfiles(req, res) {
   }
 }
 
-export function createProfiles (req, res) {
+export async function createProfiles (req, res) {
   const userId = req.user.id
   const {name, avatar, isKids} = req.body
 
   try {
-    const result = pool.query("INSERT INTO profiles (user_id, name, avatar, is_kids) VALUES ($1 $2 $3 $4) RETURNING *", [userId, name, avatar, isKids]);
+    const result = await pool.query("INSERT INTO profiles (user_id, name, avatar, is_kids) VALUES ($1, $2, $3, $4) RETURNING *", [userId, name, avatar, isKids]);
     res.status(201).json(result.rows[0])
   } catch (err) {
       res.status(500).json({ message: "Erro ao criar perfil", detail: err.message });

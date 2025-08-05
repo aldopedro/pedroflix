@@ -39,23 +39,26 @@ export default function ProfilesScreen() {
   async function handleSubmit() {
     try {
       const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createProfiles`, {
+        method: 'POST',
         headers: {
-          method: 'POST',
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
-      if (result.status === 501) {
-        console.error('Erro na requisição:', result.statusText);
+        body: JSON.stringify(newProfile),
+      });
+
+      if (!result.ok) {
+        const error = await result.json();
+        console.error('Erro na requisição:', error.message || result.statusText);
         return;
-      } else {
-        
       }
+
+      const createdProfile = await result.json();
+      setProfiles([...profiles, createdProfile]);
+      setShowModal(false);
     } catch (err) {
-      console.log("catch error" + err)
+      console.error("Erro ao criar perfil:", err);
     }
-    setProfiles([...profiles, { ...newProfile, id: Date.now() }]);
-    setShowModal(false);
   }
   return (
     <AuthGuard>
