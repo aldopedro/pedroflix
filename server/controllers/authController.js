@@ -32,16 +32,26 @@ export function refresh(req, res) {
   });
 }
 
-export function getProfiles(req, res) {
-  const userId = req.user.id
+export async function getProfiles(req, res) {
+  const userId = req.user?.id;
+
+  if (!userId) {
+    return res.status(401).json({ message: "Usuário não autenticado" });
+  }
 
   try {
-    const result = pool.query("SELECT * FROM profiles WHERE user_id = $1", [userId]);
-    res.status(201).json(result.rows)
+    const result = await pool.query(
+      "SELECT * FROM profiles WHERE user_id = $1",
+      [userId]
+    );
+
+    res.status(200).json(result.rows);
   } catch (err) {
-    res.status(501).json({ message: "Erro ao buscar perfis", detail: err.message });
+    console.error("Erro ao buscar perfis:", err);
+    res.status(500).json({ message: "Erro ao buscar perfis", detail: err.message });
   }
 }
+
 
 export async function createProfiles (req, res) {
   const userId = req.user.id
