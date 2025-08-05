@@ -22,8 +22,7 @@ export default function ProfilesScreen() {
   });
 
   useEffect(() => {
-    // Buscar perfis existentes
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/profiles`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/getProfiles`, {
       headers: {
         method: "GET",
         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -37,11 +36,26 @@ export default function ProfilesScreen() {
   const handleAddProfile = async () => {
     setShowModal(true)
   };
-  function handleSubmit() {
-    // Aqui você faria a chamada pro backend
+  async function handleSubmit() {
+    try {
+      const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createProfiles`, {
+        headers: {
+          method: 'POST',
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+      })
+      if (result.status === 501) {
+        console.error('Erro na requisição:', result.statusText);
+        return;
+      } else {
+        
+      }
+    } catch (err) {
+      console.log("catch error" + err)
+    }
     setProfiles([...profiles, { ...newProfile, id: Date.now() }]);
     setShowModal(false);
-    setNewProfile({ name: "", avatar: "/avatars/avatar1.png", isChild: false });
   }
   return (
     <AuthGuard>
@@ -79,9 +93,11 @@ export default function ProfilesScreen() {
                 className="modalInputName"
                 onChange={(e) => setNewProfile({ ...newProfile, name: e.target.value })}
                 onClick={() => setModalPlaceholder(false)}
-                onBlur={(e) => {if (e.target.value != "") {
-                  setModalPlaceholder(false)
-                } else {setModalPlaceholder(true)}}}
+                onBlur={(e) => {
+                  if (e.target.value != "") {
+                    setModalPlaceholder(false)
+                  } else { setModalPlaceholder(true) }
+                }}
               />
               <span className={modalPlaceholder ? "modalPlaceholder" : "modalPlaceholderFalse"}>Nome</span>
               <label>Escolha um avatar:</label>
@@ -90,7 +106,7 @@ export default function ProfilesScreen() {
                   const url = `/avatars/avatar${n}.png`;
                   return (
                     <Image
-                    alt="avatar"
+                      alt="avatar"
                       key={n}
                       src={url}
                       className={newProfile.avatar === url ? "selected" : ""}
