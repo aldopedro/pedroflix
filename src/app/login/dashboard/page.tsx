@@ -7,7 +7,7 @@ import Image from "next/image";
 type Profile = {
   id: number;
   name: string;
-  avatar: string;
+  avatar_url: string;
   isChild: boolean;
 };
 
@@ -17,7 +17,7 @@ export default function ProfilesScreen() {
   const [modalPlaceholder, setModalPlaceholder] = useState(true);
   const [newProfile, setNewProfile] = useState({
     name: "",
-    avatar: "/avatars/avatar1.png",
+    avatar_url: "/avatars/avatar1.png",
     isChild: false,
   });
 
@@ -67,7 +67,7 @@ export default function ProfilesScreen() {
         {profiles.map((profile) => (
           <div key={profile.id} className="profileBox">
             <div>
-              <Image src={profile.avatar} alt={profile.name} />
+              <Image src={profile.avatar_url} alt={profile.name} />
               <span>{profile.name}</span>
             </div>
           </div>
@@ -112,8 +112,8 @@ export default function ProfilesScreen() {
                       alt="avatar"
                       key={n}
                       src={url}
-                      className={newProfile.avatar === url ? "selected" : ""}
-                      onClick={() => setNewProfile({ ...newProfile, avatar: url })}
+                      className={newProfile.avatar_url === url ? "selected" : ""}
+                      onClick={() => setNewProfile({ ...newProfile, avatar_url: url })}
                     />
                   );
                 })}
