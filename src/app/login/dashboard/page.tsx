@@ -69,7 +69,7 @@ export default function ProfilesScreen() {
             <div>
               <Image className="profileAvatar" src={profile.avatar_url} alt={profile.name} />
             </div>
-              <span>{profile.name}</span>
+              <span className="profileText">{profile.name}</span>
           </div>
         ))}
         {profiles.length < 4 && 
