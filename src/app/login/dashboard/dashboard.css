@@ -8,6 +8,7 @@ body {
   align-items: center;
   height: 100vh;
   flex-wrap: wrap;
+  gap: 2vw;
 }
 
 .profileBox,
@@ -35,7 +36,7 @@ body {
   background-color: white;
 }
 
-.mainProfileBox:hover .profileAvatar {
+.profileBox:hover .profileAvatar {
   background: white;
 }
 
