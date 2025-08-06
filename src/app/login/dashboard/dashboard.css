@@ -2,8 +2,10 @@
 body {
   background-color: #000;
 }
-.profileBox {
-  height: 100vh;
+.profileGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileBox,
@@ -15,9 +17,10 @@ body {
 }
 
 .mainProfileBox {
-  width: 10vw;
+  width: 192px;
   cursor: pointer;
   border-radius: 4px;
+  max-height: 192px;
 }
 
 .mainProfileBox:hover .iconText {
@@ -30,14 +33,25 @@ body {
   background-color: white;
 }
 
+.mainProfileBox:hover .profileAvatar {
+  background: white;
+}
+
+.profileAvatar {
+  max-height: 192px;
+  border-radius: 4px;
+  border: 1px solid white;
+  background: #333;
+}
+
 .mainIconCircle {
   border-radius: 4px;
 }
 
 .iconCircle {
   display: flex;
-    width: 5.8vw;
-    height: 5.8vw;
+    width: 110px;
+    height: 110px;
     text-align: center;
     justify-content: center;
     align-items: center;

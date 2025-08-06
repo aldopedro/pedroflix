@@ -61,15 +61,15 @@ export default function ProfilesScreen() {
     }
   }
   return (
-    <AuthGuard>
+    
 
       <div className="profileGrid">
         {profiles.map((profile) => (
           <div key={profile.id} className="profileBox">
             <div>
-              <Image src={profile.avatar_url} alt={profile.name} />
-              <span>{profile.name}</span>
+              <Image className="profileAvatar" src={profile.avatar_url} alt={profile.name} />
             </div>
+              <span>{profile.name}</span>
           </div>
         ))}
 
@@ -141,6 +141,6 @@ export default function ProfilesScreen() {
           </div>
         )}
       </div>
-    </AuthGuard>
+  
   );
 }
