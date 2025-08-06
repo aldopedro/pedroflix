@@ -62,7 +62,7 @@ export default function ProfilesScreen() {
   }
   return (
     
-
+      <AuthGuard>
       <div className="profileGrid">
         {profiles.map((profile) => (
           <div key={profile.id} className="profileBox">
@@ -72,7 +72,7 @@ export default function ProfilesScreen() {
               <span>{profile.name}</span>
           </div>
         ))}
-
+        {profiles.length < 4 && 
         <div className="profileBox" >
           <div className="mainProfileBox" onClick={handleAddProfile}>
             <div className="mainIconCircle">
@@ -83,6 +83,7 @@ export default function ProfilesScreen() {
             <p className="profileText">Adicionar perfil</p>
           </div>
         </div>
+        }
         {showModal && (
           <div className="modalOverlay">
             <div className="modalContent">
@@ -141,6 +142,6 @@ export default function ProfilesScreen() {
           </div>
         )}
       </div>
-  
+  </AuthGuard>
   );
 }
