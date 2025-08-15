@@ -8,7 +8,7 @@ type Movie = {
   poster: string;
   overview: string;
   release_date: string;
-  preview: string;
+  preview?: string; // URL do trailer ou vídeo
 };
 
 export default function MovieCard({ movie }: { movie: Movie }) {
@@ -18,7 +18,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     if (hovered && movie.preview) {
-      timeout = setTimeout(() => setShowVideo(true), 500); // delay 500ms
+      timeout = setTimeout(() => setShowVideo(true), 500); // delay do hover
     } else {
       setShowVideo(false);
     }
@@ -27,7 +27,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
 
   return (
     <div
-      className={`${styles.card} ${hovered ? styles.hovered : ""}`}
+      className={`${styles.card} ${hovered ? styles.cardHovered : ""}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -42,8 +42,9 @@ export default function MovieCard({ movie }: { movie: Movie }) {
           allowFullScreen
         ></iframe>
       )}
-      <div className={styles.info}>
-        <h4>{movie.title}</h4>
+      <div className={styles.overlay}>
+        <p className={styles.title}>{movie.title}</p>
+        <p className={styles.release}>{movie.release_date}</p>
       </div>
     </div>
   );

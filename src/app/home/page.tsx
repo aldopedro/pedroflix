@@ -8,7 +8,7 @@ type Movie = {
   poster: string;
   overview: string;
   release_date: string;
-  preview: string;
+  preview?: string;
 };
 
 export default function Home() {
@@ -17,7 +17,10 @@ export default function Home() {
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/popular`)
       .then((res) => res.json())
-      .then(setMovies)
+      .then((data) => {
+        if (Array.isArray(data)) setMovies(data);
+        else setMovies([]);
+      })
       .catch(console.error);
   }, []);
 
@@ -29,6 +32,8 @@ export default function Home() {
         overflowX: "auto",
         padding: "20px",
         scrollBehavior: "smooth",
+        background: "linear-gradient(180deg, #141414 0%, #000 100%)",
+        minHeight: "100vh",
       }}
     >
       {movies.map((movie) => (
