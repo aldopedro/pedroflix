@@ -74,3 +74,35 @@ export async function createProfiles (req, res) {
 export function validate(req, res) {
   res.status(200).json({ message: "Token válido", id: (req.user).id });
 }
+
+export async function getPopularMoviesWithTrailer(req, res) {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
+          accept: 'application/json',
+        },
+      }
+    );
+
+    console.log("Status:", response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("TMDB Error:", errorText);
+      return res
+        .status(response.status)
+        .json({ error: "Erro ao buscar filmes", detail: errorText });
+    }
+
+    const data = await response.json();
+    res.json(data.results);
+  } catch (err) {
+    console.error("Catch Error:", err);
+    res
+      .status(500)
+      .json({ error: "Erro ao buscar filmes", detail: err.message });
+  }
+}

@@ -16,9 +16,9 @@ DATABASE_URL = *url do seu banco
 - [x] Typescript
 - [x] Postgre
 - [x] JWT+COOKIES
+- [x] Bcrypt Hash - para encriptação de senha
 
 Futuras tecnologias:
 
-- [] Bcrypt Hash - para encriptação de senha
 - [] Implantação de cards e player
 - [] Testes Unitários
