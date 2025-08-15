@@ -10,18 +10,23 @@ type MovieDetailModalProps = {
 export default function MovieDetailModal({ movie, onClose }: MovieDetailModalProps) {
   if (!movie) return null;
 
+  const embedUrl = movie.trailerKey
+    ? `https://www.youtube.com/embed/${movie.trailerKey}?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0`
+    : null;
+
   return (
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {movie.trailer && (
+        {embedUrl && (
           <iframe
-            src={movie.trailer}
-            className={styles.video}
+            src={embedUrl}
             frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
-          ></iframe>
+            className={styles.video}
+          />
         )}
+
         <div className={styles.info}>
           <h2>{movie.title}</h2>
           <p className={styles.release}>{movie.release_date}</p>
