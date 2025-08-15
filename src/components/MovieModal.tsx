@@ -6,7 +6,7 @@ type MovieModalProps = {
 };
 
 export default function MovieModal({ trailerKey }: MovieModalProps) {
-  const embedUrl = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&playlist=${trailerKey}`;
+  const embedUrl = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&loop=1&playlist=${trailerKey}`;
 
   return (
     <div className={styles.hoverModal}>
