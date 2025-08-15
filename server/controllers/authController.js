@@ -75,8 +75,11 @@ export function validate(req, res) {
   res.status(200).json({ message: "Token válido", id: (req.user).id });
 }
 
+import fetch from "node-fetch";
+
 export async function getPopularMoviesWithTrailer(req, res) {
   try {
+    // Filmes populares
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1`,
       {
@@ -89,7 +92,6 @@ export async function getPopularMoviesWithTrailer(req, res) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("TMDB Error:", errorText);
       return res
         .status(response.status)
         .json({ error: "Erro ao buscar filmes", detail: errorText });
@@ -97,22 +99,44 @@ export async function getPopularMoviesWithTrailer(req, res) {
 
     const data = await response.json();
 
-  
-    const movies = data.results.map((movie) => ({
-      id: movie.id,
-      title: movie.title,
-      overview: movie.overview,
-      release_date: movie.release_date,
-      poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-      backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
-      video: movie.video, 
-    }));
+    // Para cada filme, buscar trailer oficial
+    const movies = await Promise.all(
+      data.results.map(async (movie) => {
+        let trailerKey = null;
+
+        try {
+          const videoRes = await fetch(
+            `https://api.themoviedb.org/3/movie/${movie.id}/videos?language=pt-BR`,
+            {
+              headers: {
+                Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
+                accept: "application/json",
+              },
+            }
+          );
+          const videoData = await videoRes.json();
+          const trailer = videoData.results.find(
+            (v) => v.type === "Trailer" && v.site === "YouTube"
+          );
+          if (trailer) trailerKey = trailer.key;
+        } catch (err) {
+          console.error("Erro ao buscar trailer:", err);
+        }
+
+        return {
+          id: movie.id,
+          title: movie.title,
+          overview: movie.overview,
+          release_date: movie.release_date,
+          poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+          backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
+          trailer: trailerKey ? `https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${trailerKey}` : null,
+        };
+      })
+    );
 
     res.json(movies);
   } catch (err) {
-    console.error("Catch Error:", err);
-    res
-      .status(500)
-      .json({ error: "Erro ao buscar filmes", detail: err.message });
+    res.status(500).json({ error: "Erro interno", detail: err.message });
   }
 }

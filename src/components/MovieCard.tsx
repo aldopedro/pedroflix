@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import MovieModal from "./MovieModal";
 import styles from "./MovieCard.module.css";
 
@@ -9,22 +9,12 @@ type Movie = {
   poster: string;
   overview: string;
   release_date: string;
-  preview?: string; // URL do trailer
+  trailer?: string;
 };
 
 export default function MovieCard({ movie }: { movie: Movie }) {
   const [hovered, setHovered] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (hovered && videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
-    } else if (videoRef.current) {
-      videoRef.current.pause();
-    }
-  }, [hovered]);
 
   return (
     <>
@@ -34,16 +24,16 @@ export default function MovieCard({ movie }: { movie: Movie }) {
         onMouseLeave={() => setHovered(false)}
         onClick={() => setModalOpen(true)}
       >
-        {!hovered || !movie.preview ? (
+        {!hovered || !movie.trailer ? (
           <img src={movie.poster} alt={movie.title} className={styles.thumbnail} />
         ) : (
-          <video
-            ref={videoRef}
-            src={movie.preview}
+          <iframe
+            src={movie.trailer}
             className={styles.video}
-            muted
-            loop
-          />
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
         )}
 
         <div className={styles.overlay}>
