@@ -1,21 +1,27 @@
 
 import jwt from "jsonwebtoken";
 import pool from "../db/pool.js";
+import bcrypt from "bcrypt";
 
 export async function login(req, res) {
   const { email, password } = req.body;
 
   try {
-    const result = await pool.query("SELECT * FROM users WHERE email = $1 AND password = $2", [email, password]);
-
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
     if (result.rows.length === 0) {
       return res.status(401).json({ success: false, message: "Credenciais inválidas" });
     }
-      const user = result.rows[0]
-    const token = jwt.sign({ id:user.id }, process.env.SECRET, { expiresIn: 300 });
+
+    const user = result.rows[0];
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ success: false, message: "Credenciais inválidas" });
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: 300 });
     res.status(200).json({ token, auth: true, success: true, message: "Autenticado com sucesso!" });
   } catch (err) {
-    res.status(500).json({ error: "Erro ao autenticar", detail: (err).message });
+    res.status(500).json({ error: "Erro ao autenticar", detail: err.message });
   }
 }
 

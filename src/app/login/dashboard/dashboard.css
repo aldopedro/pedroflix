@@ -17,11 +17,11 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .mainProfileBox {
   width: 192px;
-  cursor: pointer;
   border-radius: 4px;
   max-height: 192px;
 }
@@ -38,6 +38,9 @@ body {
 
 .profileBox:hover .profileAvatar {
   background: white;
+}
+.profileBox:hover .profileText {
+  color: white;
 }
 
 .profileAvatar {

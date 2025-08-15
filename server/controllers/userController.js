@@ -1,6 +1,7 @@
 
 import jwt from "jsonwebtoken";
 import pool from "../db/pool.js";
+import bcrypt from "bcrypt";
 
 export async function register(req, res) {
   const { email, password } = req.body;
@@ -15,13 +16,23 @@ export async function register(req, res) {
     if (existing.rows.length > 0) {
       return res.json({ emailExist: true });
     }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const insertResult = await pool.query(
+      "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id",
+      [email, hashedPassword]
+    );
 
-    const insertResult = await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password]);
-    const userId = result.rows[0].id
-    const token = jwt.sign({id:userId }, process.env.SECRET, { expiresIn: 300 });
-    return res.status(201).json({ message: "Usuário criado com sucesso!", token, redirectUrl: "/login/dashboard" });
+    const userId = insertResult.rows[0].id;
+    const token = jwt.sign({ id: userId }, process.env.SECRET, { expiresIn: 300 });
+
+    return res.status(201).json({
+      message: "Usuário criado com sucesso!",
+      token,
+      redirectUrl: "/login/dashboard"
+    });
   } catch (err) {
-    res.status(500).json({ error: "Erro interno", detail: (err).message });
+    res.status(500).json({ error: "Erro interno", detail: err.message });
   }
 }
 
