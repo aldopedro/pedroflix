@@ -82,12 +82,10 @@ export async function getPopularMoviesWithTrailer(req, res) {
       {
         headers: {
           Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
-          accept: 'application/json',
+          accept: "application/json",
         },
       }
     );
-
-    console.log("Status:", response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -98,7 +96,19 @@ export async function getPopularMoviesWithTrailer(req, res) {
     }
 
     const data = await response.json();
-    res.json(data.results);
+
+  
+    const movies = data.results.map((movie) => ({
+      id: movie.id,
+      title: movie.title,
+      overview: movie.overview,
+      release_date: movie.release_date,
+      poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+      backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
+      video: movie.video, 
+    }));
+
+    res.json(movies);
   } catch (err) {
     console.error("Catch Error:", err);
     res
