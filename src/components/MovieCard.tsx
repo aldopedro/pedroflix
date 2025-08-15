@@ -1,15 +1,16 @@
 "use client";
 import { useState } from "react";
-import MovieModal from "./MovieModal";
+import MovieModal from "./MovieModal"; // Hover modal
+import MovieDetailModal from "./MovieDetailModal"; // Modal completo ao clicar
 import styles from "./MovieCard.module.css";
 
-type Movie = {
+export type Movie = {
   id: number;
   title: string;
   poster: string;
   overview: string;
   release_date: string;
-  trailer?: string;
+  trailer?: string; // URL do YouTube embed
 };
 
 export default function MovieCard({ movie }: { movie: Movie }) {
@@ -19,30 +20,22 @@ export default function MovieCard({ movie }: { movie: Movie }) {
   return (
     <>
       <div
-        className={`${styles.card} ${hovered ? styles.cardHovered : ""}`}
+        className={styles.card}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={() => setModalOpen(true)}
       >
-        {!hovered || !movie.trailer ? (
-          <img src={movie.poster} alt={movie.title} className={styles.thumbnail} />
-        ) : (
-          <iframe
-            src={movie.trailer}
-            className={styles.video}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-          ></iframe>
-        )}
+        <img src={movie.poster} alt={movie.title} className={styles.thumbnail} />
 
         <div className={styles.overlay}>
           <p className={styles.title}>{movie.title}</p>
           <p className={styles.release}>{movie.release_date}</p>
         </div>
+
+        {hovered && movie.trailer && <MovieModal movie={movie} />}
       </div>
 
-      {modalOpen && <MovieModal movie={movie} onClose={() => setModalOpen(false)} />}
+      {modalOpen && <MovieDetailModal movie={movie} onClose={() => setModalOpen(false)} />}
     </>
   );
 }

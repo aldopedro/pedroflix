@@ -1,44 +1,26 @@
 "use client";
+import { Movie } from "./MovieCard";
 import styles from "./MovieModal.module.css";
 
-type Movie = {
-  id: number;
-  title: string;
-  poster: string;
-  overview: string;
-  release_date: string;
-  preview?: string;
+type MovieModalProps = {
+  movie: Movie;
 };
 
-export default function MovieModal({
-  movie,
-  onClose,
-}: {
-  movie: Movie;
-  onClose: () => void;
-}) {
-  if (!movie) return null;
-
+export default function MovieModal({ movie }: MovieModalProps) {
   return (
-    <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {movie.preview && (
-          <iframe
-            src={movie.preview}
-            className={styles.video}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-          ></iframe>
-        )}
-        <div className={styles.info}>
-          <h2>{movie.title}</h2>
-          <p className={styles.release}>{movie.release_date}</p>
-          <p className={styles.overview}>{movie.overview}</p>
-          <button className={styles.close} onClick={onClose}>
-            Fechar
-          </button>
-        </div>
+    <div className={styles.hoverModal}>
+      {movie.trailer && (
+        <iframe
+          src={movie.trailer}
+          className={styles.video}
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        ></iframe>
+      )}
+      <div className={styles.info}>
+        <h2>{movie.title}</h2>
+        <p className={styles.release}>{movie.release_date}</p>
       </div>
     </div>
   );
