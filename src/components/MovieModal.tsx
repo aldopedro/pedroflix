@@ -7,21 +7,18 @@ type MovieModalProps = {
 };
 
 export default function MovieModal({ movie }: MovieModalProps) {
+  if (!movie.trailer) return null;
+  const embedUrl = `${movie.trailer}&autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&loop=1&playlist=${movie.trailer.split("/").pop()}`;
+
   return (
     <div className={styles.hoverModal}>
-      {movie.trailer && (
-        <iframe
-          src={movie.trailer}
-          className={styles.video}
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-        ></iframe>
-      )}
-      <div className={styles.info}>
-        <h2>{movie.title}</h2>
-        <p className={styles.release}>{movie.release_date}</p>
-      </div>
+      <iframe
+        src={embedUrl}
+        className={styles.video}
+        frameBorder="0"
+        allow="autoplay; encrypted-media"
+        allowFullScreen
+      ></iframe>
     </div>
   );
 }
